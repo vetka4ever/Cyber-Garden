@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignView: UIViewController {
+class SignView: UIViewController, UITextFieldDelegate {
     
     
     var login = UITextField()
@@ -19,25 +19,33 @@ class SignView: UIViewController {
         
         login.frame = CGRect(x: 10, y: self.view.frame.height / 4 , width: self.view.frame.width - 20, height: self.view.frame.height / 9)
         login.layer.cornerRadius = 10
-        login.placeholder = "Логин"
-        login.font = UIFont(name: login.font!.fontName, size: login.frame.height / 4)
+//        login.placeholder = "Логин"
+        login.attributedPlaceholder = NSAttributedString(string: "Логин", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        login.textColor = .black
+        login.font = UIFont(name: "Large", size: login.frame.height / 4)
         login.backgroundColor = .white
+        
         login.textAlignment = .center
+        login.returnKeyType = UIReturnKeyType.continue
+        login.delegate = self
         self.view.addSubview(login)
     }
     func setPasswordView()
     {
         password.frame = CGRect(x: 10, y: self.view.frame.height / 4 * 1.6 , width: login.frame.width, height: login.frame.height)
-        password.font = UIFont(name: password.font!.fontName, size: login.frame.height / 4)
+        password.textColor = .black
+        password.font = UIFont(name: "Large", size: login.frame.height / 4)
         password.layer.cornerRadius = 10
-        password.placeholder = "Пароль"
+        password.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         
         //        print(password.font?.fontName)
         password.backgroundColor = .white
         password.textAlignment = .center
+        password.returnKeyType = UIReturnKeyType.done
+        password.delegate = self
         self.view.addSubview(password)
     }
-    @objc func goMainScreen(_ sender: UIButton)
+    @objc func goMainScreen()
     {
         
         //        let alert : UIAlertController =
@@ -71,7 +79,7 @@ class SignView: UIViewController {
         button.frame = CGRect(x: 10, y: self.view.frame.height / 4 * 3, width: password.frame.width, height: password.frame.height)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Вход", for: .normal)
-        button.addTarget(nil, action: #selector(goMainScreen(_:)), for: .touchDown)
+        button.addTarget(nil, action: #selector(goMainScreen), for: .touchDown)
         
         self.view.addSubview(button)
         
@@ -98,7 +106,19 @@ class SignView: UIViewController {
         setButton()
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == login
+        {
+            password.becomeFirstResponder()
+            
+        }
+        else
+        {
+            goMainScreen()
+          
+        }
+        return true
+    }
     
 }
 
