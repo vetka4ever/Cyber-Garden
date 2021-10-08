@@ -9,21 +9,41 @@
 /* Begin PBXBuildFile section */
 		F34884BD270C2F5D005B9E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BC270C2F5D005B9E5C /* AppDelegate.swift */; };
 		F34884BF270C2F5D005B9E5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */; };
-		F34884C1270C2F5D005B9E5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884C0270C2F5D005B9E5C /* ViewController.swift */; };
-		F34884C4270C2F5D005B9E5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F34884C2270C2F5D005B9E5C /* Main.storyboard */; };
+		F34884C1270C2F5D005B9E5C /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884C0270C2F5D005B9E5C /* SignView.swift */; };
 		F34884C6270C2F61005B9E5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F34884C5270C2F61005B9E5C /* Assets.xcassets */; };
-		F34884C9270C2F61005B9E5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F34884C7270C2F61005B9E5C /* LaunchScreen.storyboard */; };
+		F3511938270D6ACC005E5D7D /* DescribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3511937270D6ACC005E5D7D /* DescribeView.swift */; };
+		F351193B270D80F9005E5D7D /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351193A270D80F9005E5D7D /* TeamView.swift */; };
+		F351193D270D8104005E5D7D /* TeamPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351193C270D8104005E5D7D /* TeamPresenter.swift */; };
+		F351193F270D810B005E5D7D /* TeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351193E270D810B005E5D7D /* TeamModel.swift */; };
+		F3550E4F270C8F56004951BA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3550E4E270C8F56004951BA /* MainScreen.swift */; };
+		F3550E51270C920D004951BA /* SignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3550E50270C920D004951BA /* SignPresenter.swift */; };
+		F3550E53270C9234004951BA /* SignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3550E52270C9234004951BA /* SignModel.swift */; };
+		F3D63C7C270CCA45007134EA /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D63C7B270CCA45007134EA /* MainPresenter.swift */; };
+		F3D63C7E270CCA4F007134EA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D63C7D270CCA4F007134EA /* MainModel.swift */; };
+		F3D63C81270CCD65007134EA /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D63C80270CCD65007134EA /* ProjectView.swift */; };
+		F3D63C83270CCD70007134EA /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D63C82270CCD70007134EA /* ProjectPresenter.swift */; };
+		F3D63C85270CCD75007134EA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D63C84270CCD75007134EA /* ProjectModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F34884B9270C2F5D005B9E5C /* HackIKTIB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIKTIB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F34884BC270C2F5D005B9E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F34884C0270C2F5D005B9E5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F34884C3270C2F5D005B9E5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F34884C0270C2F5D005B9E5C /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
 		F34884C5270C2F61005B9E5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F34884C8270C2F61005B9E5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F34884CA270C2F61005B9E5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3511937270D6ACC005E5D7D /* DescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribeView.swift; sourceTree = "<group>"; };
+		F351193A270D80F9005E5D7D /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
+		F351193C270D8104005E5D7D /* TeamPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPresenter.swift; sourceTree = "<group>"; };
+		F351193E270D810B005E5D7D /* TeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamModel.swift; sourceTree = "<group>"; };
+		F3550E4E270C8F56004951BA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		F3550E50270C920D004951BA /* SignPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignPresenter.swift; sourceTree = "<group>"; };
+		F3550E52270C9234004951BA /* SignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignModel.swift; sourceTree = "<group>"; };
+		F3D63C7B270CCA45007134EA /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		F3D63C7D270CCA4F007134EA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		F3D63C80270CCD65007134EA /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		F3D63C82270CCD70007134EA /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
+		F3D63C84270CCD75007134EA /* ProjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +78,55 @@
 			children = (
 				F34884BC270C2F5D005B9E5C /* AppDelegate.swift */,
 				F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */,
-				F34884C0270C2F5D005B9E5C /* ViewController.swift */,
-				F34884C2270C2F5D005B9E5C /* Main.storyboard */,
+				F34884D0270C2FB6005B9E5C /* Sign in */,
+				F3550E4D270C8BC7004951BA /* Main Screen */,
+				F3D63C7F270CCD3E007134EA /* Project Screen */,
+				F3511939270D80E2005E5D7D /* Team Screen */,
 				F34884C5270C2F61005B9E5C /* Assets.xcassets */,
-				F34884C7270C2F61005B9E5C /* LaunchScreen.storyboard */,
 				F34884CA270C2F61005B9E5C /* Info.plist */,
 			);
 			path = HackIKTIB;
+			sourceTree = "<group>";
+		};
+		F34884D0270C2FB6005B9E5C /* Sign in */ = {
+			isa = PBXGroup;
+			children = (
+				F34884C0270C2F5D005B9E5C /* SignView.swift */,
+				F3550E50270C920D004951BA /* SignPresenter.swift */,
+				F3550E52270C9234004951BA /* SignModel.swift */,
+			);
+			path = "Sign in";
+			sourceTree = "<group>";
+		};
+		F3511939270D80E2005E5D7D /* Team Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F351193A270D80F9005E5D7D /* TeamView.swift */,
+				F351193C270D8104005E5D7D /* TeamPresenter.swift */,
+				F351193E270D810B005E5D7D /* TeamModel.swift */,
+			);
+			path = "Team Screen";
+			sourceTree = "<group>";
+		};
+		F3550E4D270C8BC7004951BA /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F3550E4E270C8F56004951BA /* MainScreen.swift */,
+				F3D63C7B270CCA45007134EA /* MainPresenter.swift */,
+				F3D63C7D270CCA4F007134EA /* MainModel.swift */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		F3D63C7F270CCD3E007134EA /* Project Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F3D63C80270CCD65007134EA /* ProjectView.swift */,
+				F3511937270D6ACC005E5D7D /* DescribeView.swift */,
+				F3D63C82270CCD70007134EA /* ProjectPresenter.swift */,
+				F3D63C84270CCD75007134EA /* ProjectModel.swift */,
+			);
+			path = "Project Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F34884C9270C2F61005B9E5C /* LaunchScreen.storyboard in Resources */,
 				F34884C6270C2F61005B9E5C /* Assets.xcassets in Resources */,
-				F34884C4270C2F5D005B9E5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,32 +198,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F34884C1270C2F5D005B9E5C /* ViewController.swift in Sources */,
+				F3D63C7E270CCA4F007134EA /* MainModel.swift in Sources */,
+				F3D63C83270CCD70007134EA /* ProjectPresenter.swift in Sources */,
+				F3550E53270C9234004951BA /* SignModel.swift in Sources */,
+				F3550E51270C920D004951BA /* SignPresenter.swift in Sources */,
+				F3550E4F270C8F56004951BA /* MainScreen.swift in Sources */,
+				F351193B270D80F9005E5D7D /* TeamView.swift in Sources */,
+				F3511938270D6ACC005E5D7D /* DescribeView.swift in Sources */,
+				F34884C1270C2F5D005B9E5C /* SignView.swift in Sources */,
 				F34884BD270C2F5D005B9E5C /* AppDelegate.swift in Sources */,
+				F3D63C7C270CCA45007134EA /* MainPresenter.swift in Sources */,
+				F3D63C85270CCD75007134EA /* ProjectModel.swift in Sources */,
+				F351193F270D810B005E5D7D /* TeamModel.swift in Sources */,
 				F34884BF270C2F5D005B9E5C /* SceneDelegate.swift in Sources */,
+				F3D63C81270CCD65007134EA /* ProjectView.swift in Sources */,
+				F351193D270D8104005E5D7D /* TeamPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		F34884C2270C2F5D005B9E5C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F34884C3270C2F5D005B9E5C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F34884C7270C2F61005B9E5C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F34884C8270C2F61005B9E5C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F34884CB270C2F61005B9E5C /* Debug */ = {
@@ -217,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -272,7 +325,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,11 +342,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBRFGT8CHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackIKTIB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -316,11 +370,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBRFGT8CHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackIKTIB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
