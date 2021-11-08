@@ -6,10 +6,18 @@
 //
 
 import UIKit
-struct TeamModel
+class TeamModel
 {
+    var sortOfPoints = ["Оригинальность","Креативность","Привлекающие технологии"]
+    private var points = [String : Decimal]()
     func getTeamDescribe() -> [String]
     {
         [""]
+    }
+    
+    func writeOnePoint(title: String, point: Decimal)
+    {
+        self.points[title] = point
+        print(points)
     }
 }

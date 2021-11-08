@@ -15,7 +15,6 @@ class DescribeView: UIViewController {
         super.viewDidLoad()
         
         
-        
         describe.frame = view.frame
         describe.textAlignment = .center
         describe.isEditable = false
