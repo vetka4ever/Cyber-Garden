@@ -88,6 +88,7 @@ extension SignView
         }
         else
         {
+            textField.isSelected = false
             let resultOfLogIn = presenter.updateData(login: login.text!, password: password.text!)
             {
                 whatIShouldShow in

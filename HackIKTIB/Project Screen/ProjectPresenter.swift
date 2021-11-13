@@ -12,15 +12,26 @@ class ProjectPresenter
     private let model = ProjectModel()
     
     
-    func updateTeams(key: Int) -> [String]
+    func updateTeams(teams: [String: Team])
     {
         // here will be get request, but now
-        model.getTeams(key: key)
+        model.getTeams(teams: teams)
     }
-    func updateInfoTeam()
+//    func updateInfoTeam()
+//    {
+//
+//    }
+    
+    func nameOfTeam(id: Int) -> String
     {
-        
+        return model.getNameOfTeam(id: id)
     }
+    
+    func countOfTeams() -> Int
+    {
+        return model.getCountOfTeams()
+    }
+    
     
     func updateDescribeView(title: String) -> UINavigationController
     {

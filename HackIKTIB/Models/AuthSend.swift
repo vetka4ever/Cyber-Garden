@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct AuthSend: Codable
 {
     let login: String

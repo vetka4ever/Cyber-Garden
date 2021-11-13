@@ -14,7 +14,7 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
     var teamName = ""
     private var presenter = TeamPresenter()
     var idCell = "Cell"
-    var sortOfPoints = ["Оригинальность","Креативность","Привлекающие технологии"]
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         
@@ -61,7 +61,7 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as! PointOfJuryCell
 //        cell.title.text = sortOfPoints[indexPath.row]
-        cell.setTitle(title: sortOfPoints[indexPath.row])
+//        cell.setTitle(title: sortOfPoints[indexPath.row])
         
         cell.backgroundColor = .white
         //        cell.textLabel?.text = sortOfPoints[indexPath.row]

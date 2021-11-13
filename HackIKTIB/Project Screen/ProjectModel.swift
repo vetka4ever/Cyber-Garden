@@ -6,15 +6,31 @@
 //
 
 import Foundation
-struct ProjectModel
+class ProjectModel
 {
-   func getTeams() -> [[String]]
+    private let title = "Команды"
+    private var teams = [String: Team]()
+    private var nameOfTeams = [String]()
+//    private var teams = [["Winx", "Winston", "Одуванчики"], ["Angry Birds", "Do Nice", "OneOfTheBest"], ["Awesome", "Смешарики","Чудеса на виражах"]]
+    
+    func getTeams(teams: [String: Team])
     {
-        return [["Winx", "Winston", "Одуванчики"], ["Angry Birds", "Do Nice", "OneOfTheBest"], ["Awesome", "Смешарики","Чудеса на виражах"]]
+        self.teams = teams
+        nameOfTeams = teams.keys.sorted()
     }
     
-    func getInfoTeams()
+    func getNameOfTeam(id: Int) -> String
     {
-        
+        return nameOfTeams[id]
+    }
+    
+    func getCountOfTeams() -> Int
+    {
+        return teams.keys.count
+    }
+    
+    func getTitle() -> String
+    {
+        return title
     }
 }

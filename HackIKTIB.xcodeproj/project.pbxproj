@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59C1D9346FE0574085B51AF7 /* libPods-HackIKTIB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90186540E7CA4644007B1D93 /* libPods-HackIKTIB.a */; };
+		7BC5886A52E489D82F8AB82A /* Pods_HackIKTIB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A0200BABE314372AB81ACE /* Pods_HackIKTIB.framework */; };
 		A546F56527147EED00C2E241 /* PointOfJuryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546F56427147EED00C2E241 /* PointOfJuryCell.swift */; };
-		A5AB005F27393C9F008E5AC9 /* AuthGet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB005E27393C9F008E5AC9 /* AuthGet.swift */; };
+		A5AB005F27393C9F008E5AC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB005E27393C9F008E5AC9 /* User.swift */; };
 		A5AB006127393D65008E5AC9 /* AuthSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB006027393D65008E5AC9 /* AuthSend.swift */; };
+		F3232DCF273D7E1200345694 /* Сases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3232DCE273D7E1200345694 /* Сases.swift */; };
 		F34884BD270C2F5D005B9E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BC270C2F5D005B9E5C /* AppDelegate.swift */; };
 		F34884BF270C2F5D005B9E5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */; };
 		F34884C1270C2F5D005B9E5C /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884C0270C2F5D005B9E5C /* SignView.swift */; };
@@ -32,10 +33,11 @@
 /* Begin PBXFileReference section */
 		16717CB3F9BD40811DB6DDE3 /* Pods-HackIKTIB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIKTIB.debug.xcconfig"; path = "Target Support Files/Pods-HackIKTIB/Pods-HackIKTIB.debug.xcconfig"; sourceTree = "<group>"; };
 		2307E3CC0F1FCB64D0B2A630 /* Pods-HackIKTIB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIKTIB.release.xcconfig"; path = "Target Support Files/Pods-HackIKTIB/Pods-HackIKTIB.release.xcconfig"; sourceTree = "<group>"; };
-		90186540E7CA4644007B1D93 /* libPods-HackIKTIB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackIKTIB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3A0200BABE314372AB81ACE /* Pods_HackIKTIB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIKTIB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A546F56427147EED00C2E241 /* PointOfJuryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfJuryCell.swift; sourceTree = "<group>"; };
-		A5AB005E27393C9F008E5AC9 /* AuthGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGet.swift; sourceTree = "<group>"; };
+		A5AB005E27393C9F008E5AC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5AB006027393D65008E5AC9 /* AuthSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSend.swift; sourceTree = "<group>"; };
+		F3232DCE273D7E1200345694 /* Сases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сases.swift"; sourceTree = "<group>"; };
 		F34884B9270C2F5D005B9E5C /* HackIKTIB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIKTIB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F34884BC270C2F5D005B9E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59C1D9346FE0574085B51AF7 /* libPods-HackIKTIB.a in Frameworks */,
+				7BC5886A52E489D82F8AB82A /* Pods_HackIKTIB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +82,7 @@
 		9FA184D90021FEA90DAD0CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				90186540E7CA4644007B1D93 /* libPods-HackIKTIB.a */,
+				A3A0200BABE314372AB81ACE /* Pods_HackIKTIB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,8 +92,9 @@
 			children = (
 				F3511937270D6ACC005E5D7D /* DescribeView.swift */,
 				A546F56427147EED00C2E241 /* PointOfJuryCell.swift */,
-				A5AB005E27393C9F008E5AC9 /* AuthGet.swift */,
+				A5AB005E27393C9F008E5AC9 /* User.swift */,
 				A5AB006027393D65008E5AC9 /* AuthSend.swift */,
+				F3232DCE273D7E1200345694 /* Сases.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				F34884B5270C2F5D005B9E5C /* Sources */,
 				F34884B6270C2F5D005B9E5C /* Frameworks */,
 				F34884B7270C2F5D005B9E5C /* Resources */,
+				46B725C889613BB4ECB22690 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -258,6 +262,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		46B725C889613BB4ECB22690 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HackIKTIB/Pods-HackIKTIB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HackIKTIB/Pods-HackIKTIB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackIKTIB/Pods-HackIKTIB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -279,8 +300,9 @@
 				F3D63C7C270CCA45007134EA /* MainPresenter.swift in Sources */,
 				F3D63C85270CCD75007134EA /* ProjectModel.swift in Sources */,
 				F351193F270D810B005E5D7D /* TeamModel.swift in Sources */,
-				A5AB005F27393C9F008E5AC9 /* AuthGet.swift in Sources */,
+				A5AB005F27393C9F008E5AC9 /* User.swift in Sources */,
 				F34884BF270C2F5D005B9E5C /* SceneDelegate.swift in Sources */,
+				F3232DCF273D7E1200345694 /* Сases.swift in Sources */,
 				F3D63C81270CCD65007134EA /* ProjectView.swift in Sources */,
 				F351193D270D8104005E5D7D /* TeamPresenter.swift in Sources */,
 			);

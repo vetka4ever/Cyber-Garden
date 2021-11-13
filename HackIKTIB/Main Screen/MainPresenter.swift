@@ -11,10 +11,10 @@ class MainPresenter
 {
     private var model = MaindModel()
     
-//     func updateNameOfJury() -> String
-//    {
-//        return model.getNameOfJury()
-//    }
+     private func updateNameOfJury() -> String
+    {
+        return model.getNameOfJury()
+    }
     
      func getInfoLabel() -> UILabel
     {
@@ -22,43 +22,59 @@ class MainPresenter
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = model.getNameOfJury()
+        
         return label
     }
     
     func getLeftItemForNavigationBar() -> UIBarButtonItem
     {
-        return UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        let image = UIImage.init(systemName: "power")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+        return UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        
     }
     
-    
-    
-    
-    func updateProjectName() -> [String]
+    func loadProjects(compilationHandler: @escaping ()->())
     {
-        return model.getProjectNames()
+        model.loadProjects {
+            compilationHandler()
+        }
     }
-    func updateDataAboutProject() -> [String]
+    
+    func deleteDataOfUser()
     {
-        return model.getDataAboutProjects()
+        model.deleteDataOfUser()
+    }
+    
+    func updateProjectName(key: Int) -> String
+    {
+        return model.getProjectNames(key: key)
+    }
+//    func updateDataAboutProject() -> [String]
+//    {
+//        return model.getDataAboutProjects()
+//    }
+    
+    func updateCountOfProjects() -> Int
+    {
+        return model.getCountOfProjects()
     }
     
     
-    func updateProjectView(id: Int, projects: [String]) -> ProjectView
+    func updateProjectView(nameOfProject: String) -> ProjectView
     {
         let projectScreen = ProjectView()
-        projectScreen.id = id
-        projectScreen.projectLabel.text = projects[id]
-        
+        let teamsOfProject = model.getTeamsOfProject(nameOfProject: nameOfProject)
+        projectScreen.writeTeams(teams: teamsOfProject)
         return projectScreen
     }
-    func updateDescribeView(key: Int) -> UINavigationController
-    {
-        let view = DescribeView()
-        view.title = model.getProjectNames()[key]
-        view.describe.text = model.getDataAboutOneProject(key: key)
-        let navigationController = UINavigationController(rootViewController: view)
-        return navigationController
-    }
+//    func updateDescribeView(key: Int) -> UINavigationController
+//    {
+//        let view = DescribeView()
+//        view.title = model.getProjectNames(key)
+//        view.describe.text = model.getDataAboutOneProject(key: key)
+//        let navigationController = UINavigationController(rootViewController: view)
+//        return navigationController
+//    }
     
     func updateTitle() -> String
     {

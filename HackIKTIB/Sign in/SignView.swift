@@ -33,6 +33,8 @@ class SignView: UIViewController, UITextFieldDelegate
         
         view.addSubview(login)
         view.addSubview(password)
+        
+        
     }
     
     @objc func regTap(_ sender: UITapGestureRecognizer)
