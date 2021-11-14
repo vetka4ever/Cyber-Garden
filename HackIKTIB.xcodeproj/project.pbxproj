@@ -11,6 +11,7 @@
 		A546F56527147EED00C2E241 /* PointOfJuryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546F56427147EED00C2E241 /* PointOfJuryCell.swift */; };
 		A5AB005F27393C9F008E5AC9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB005E27393C9F008E5AC9 /* User.swift */; };
 		A5AB006127393D65008E5AC9 /* AuthSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB006027393D65008E5AC9 /* AuthSend.swift */; };
+		F302FEBA273FDD0B0027C3A1 /* MarkSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F302FEB9273FDD0B0027C3A1 /* MarkSend.swift */; };
 		F3232DCF273D7E1200345694 /* Сases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3232DCE273D7E1200345694 /* Сases.swift */; };
 		F34884BD270C2F5D005B9E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BC270C2F5D005B9E5C /* AppDelegate.swift */; };
 		F34884BF270C2F5D005B9E5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34884BE270C2F5D005B9E5C /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 		A546F56427147EED00C2E241 /* PointOfJuryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfJuryCell.swift; sourceTree = "<group>"; };
 		A5AB005E27393C9F008E5AC9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5AB006027393D65008E5AC9 /* AuthSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSend.swift; sourceTree = "<group>"; };
+		F302FEB9273FDD0B0027C3A1 /* MarkSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkSend.swift; sourceTree = "<group>"; };
 		F3232DCE273D7E1200345694 /* Сases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сases.swift"; sourceTree = "<group>"; };
 		F34884B9270C2F5D005B9E5C /* HackIKTIB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIKTIB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F34884BC270C2F5D005B9E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				A5AB005E27393C9F008E5AC9 /* User.swift */,
 				A5AB006027393D65008E5AC9 /* AuthSend.swift */,
 				F3232DCE273D7E1200345694 /* Сases.swift */,
+				F302FEB9273FDD0B0027C3A1 /* MarkSend.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			files = (
 				F3D63C7E270CCA4F007134EA /* MainModel.swift in Sources */,
 				F3D63C83270CCD70007134EA /* ProjectPresenter.swift in Sources */,
+				F302FEBA273FDD0B0027C3A1 /* MarkSend.swift in Sources */,
 				F3550E53270C9234004951BA /* SignModel.swift in Sources */,
 				A5AB006127393D65008E5AC9 /* AuthSend.swift in Sources */,
 				F3550E51270C920D004951BA /* SignPresenter.swift in Sources */,
@@ -440,9 +444,9 @@
 				INFOPLIST_FILE = HackIKTIB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,7 +456,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -469,9 +473,9 @@
 				INFOPLIST_FILE = HackIKTIB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,7 +485,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

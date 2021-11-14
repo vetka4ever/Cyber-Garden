@@ -34,7 +34,6 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = presenter.updateTitle()
-        
     }
     
     override func viewDidLoad()
@@ -47,6 +46,7 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        presenter.updateToken{}
         presenter.loadProjects
         {
             self.tableView.reloadData()
@@ -62,7 +62,7 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let ok = UIAlertAction(title: "Да", style: .destructive)
         { (action) in
             self.presenter.deleteDataOfUser()
-//            self.navigationController?.setViewControllers([SignView()], animated: true)
+            //            self.navigationController?.setViewControllers([SignView()], animated: true)
             self.navigationController?.viewControllers = [SignView(), self]
             self.navigationController?.popViewController(animated: true)
         }
@@ -88,13 +88,14 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let nameOfTeam = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        let teamScreen = presenter.updateProjectView(nameOfProject: nameOfTeam!)
+        let nameOfProject = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let teamScreen = presenter.updateProjectView(nameOfProject: nameOfProject!)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         navigationController?.pushViewController(teamScreen, animated: true)
     }
     
-    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+//    {
     //
     //        let questionSwipe = UIContextualAction(style: .normal, title: "Подробнее")
     //        { (action, view, success) in
@@ -117,4 +118,4 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //        present(view, animated: true, completion: nil)
     //    }
 }
- 
+

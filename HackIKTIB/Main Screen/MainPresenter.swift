@@ -59,12 +59,23 @@ class MainPresenter
         return model.getCountOfProjects()
     }
     
+    func updateToken(compilationHandler: @escaping ()->())
+    {
+        model.updateToken {
+            compilationHandler()
+        }
+    }
     
     func updateProjectView(nameOfProject: String) -> ProjectView
     {
+        model.saveProjectInLocalMamory(nameOfProject: nameOfProject)
         let projectScreen = ProjectView()
-        let teamsOfProject = model.getTeamsOfProject(nameOfProject: nameOfProject)
-        projectScreen.writeTeams(teams: teamsOfProject)
+       
+//        let teamsOfProject = model.getTeamsOfProject(nameOfProject: nameOfProject)
+//        let id = model.getIdOfTeams(nameOfProject: nameOfProject)
+//        projectScreen.writeTeams(teams: teamsOfProject)
+//        projectScreen.writeId(id: id)
+        
         return projectScreen
     }
 //    func updateDescribeView(key: Int) -> UINavigationController

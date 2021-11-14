@@ -16,10 +16,15 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let idCell = "cell"
     var tableView = UITableView()
     
-    func writeTeams(teams: [String: Team])
-    {
-        presenter.updateTeams(teams: teams)
-    }
+//    func writeTeams(teams: [String: Team])
+//    {
+//        presenter.updateTeams(teams: teams)
+//    }
+//    
+//    func writeId(id: String)
+//    {
+//        presenter.writeId(id: id)
+//    }
     
     func setTableView()
     {
@@ -63,9 +68,14 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let view = TeamView()
-        view.teamName = presenter.nameOfTeam(id: indexPath.row)
+        let nameOfTeam = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let view = presenter.updateTeamView(nameOfTeam: nameOfTeam!)
+        
         navigationController?.pushViewController(view, animated: true)
+//        let view = TeamView()
+//        view.writeNameOfTeam(name: presenter.nameOfTeam(id: indexPath.row))
+//
+//        navigationController?.pushViewController(view, animated: true)
     }
     
 //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?

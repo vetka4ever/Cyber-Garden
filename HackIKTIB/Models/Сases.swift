@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 // MARK: - Case
-struct Case: Codable {
+struct Project: Codable {
     var id: String = ""
     var name: String = ""
     var teams = [String:Team]()
@@ -29,22 +29,22 @@ struct Mark: Codable {
     var mark: Int = 0
 }
 
-//class CasesRealm : Object
-//{
-//    @objc private dynamic var classData: Data? = nil
-//    var data: Cases?
-//    {
-//        get
-//        {
-//            if let currentData = classData
-//            {
-//                return try? JSONDecoder().decode(Cases.self, from: currentData)
-//            }
-//            return nil
-//        }
-//        set
-//        {
-//            classData = try? JSONEncoder().encode(newValue)
-//        }
-//    }
-//}
+class ProjectRealm : Object
+{
+    @objc private dynamic var classData: Data? = nil
+    var data: Project?
+    {
+        get
+        {
+            if let currentData = classData
+            {
+                return try? JSONDecoder().decode(Project.self, from: currentData)
+            }
+            return nil
+        }
+        set
+        {
+            classData = try? JSONEncoder().encode(newValue)
+        }
+    }
+}

@@ -12,14 +12,19 @@ class ProjectPresenter
     private let model = ProjectModel()
     
     
-    func updateTeams(teams: [String: Team])
-    {
-        // here will be get request, but now
-        model.getTeams(teams: teams)
-    }
+//    func updateTeams(teams: [String: Team])
+//    {
+//        // here will be get request, but now
+//        model.getTeams(teams: teams)
+//    }
 //    func updateInfoTeam()
 //    {
 //
+//    }
+    
+//    func writeId(id: String)
+//    {
+//        model.writeId(id: id)
 //    }
     
     func nameOfTeam(id: Int) -> String
@@ -49,5 +54,13 @@ class ProjectPresenter
         
     }
     
+    func updateTeamView(nameOfTeam: String) -> TeamView
+    {
+        model.correctTeams(nameOfTeam: nameOfTeam)
+        let view = TeamView()
+//        view.writeIdOfCase(name: model.getIdOfCase())
+//        view.writeIdOfTeam(name: model.getIdOfTeam(nameOfTeam: nameOfTeam))
+        return view
+    }
     
 }

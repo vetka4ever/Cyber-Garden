@@ -12,21 +12,17 @@ class MaindModel
 {
     
     private let title = "Проекты"
-    
     private let realm = try! Realm()
-    private var projects = [String:Case]()
+    private var projects = [String:Project]()
     private var namesOfProjects = [String]()
     private let user : Results<AuthGetRealm> =
     {
         let user = (try! Realm()).objects(AuthGetRealm.self)
         return user
     }()
-  
-    init()
-    {
-        updateToken{}
-    }
-    private func updateToken(compilationHandler: @escaping ()->())
+    
+    
+    func updateToken(compilationHandler: @escaping ()->())
     {
         let url = "https://api.cybergarden.ru/auth/login"
         let parameter = AuthSend(login: user[0].data!.user.login, password: user[0].data!.user.password)
@@ -34,7 +30,6 @@ class MaindModel
         {
             result in
             let data = JSON(result.data)
-            
             if result.response?.statusCode == 200
             {
                 
@@ -50,21 +45,41 @@ class MaindModel
                 {
                     self.user[0].data = currentUser
                 }
+                //                print(self.user[0].data?.token)
             }
             compilationHandler()
             
         }
     }
     
-    
-         func getNameOfJury() -> String
+    func saveProjectInLocalMamory(nameOfProject: String)
+    {
+        let project = realm.objects(ProjectRealm.self)
+        //        if project.count == 0
+        //        {
+        let object = ProjectRealm()
+        object.data = self.projects[nameOfProject]
+
+        try! realm.write
         {
-            var name = ""
-            guard let mayBeFirstName = user[0].data?.user.firstName else {return name}
-            guard let mayBeLastName = user[0].data?.user.lastName else {return name}
-            name = mayBeFirstName + " " + mayBeLastName
-            return name
+            project.count == 0 ? (self.realm.add(object) ): ( project[0].data = object.data)
         }
+        //        }
+        //        else
+        //        {
+        
+        
+        //        }
+    }
+    
+    func getNameOfJury() -> String
+    {
+        var name = ""
+        guard let mayBeFirstName = user[0].data?.user.firstName else {return name}
+        guard let mayBeLastName = user[0].data?.user.lastName else {return name}
+        name = mayBeFirstName + " " + mayBeLastName
+        return name
+    }
     func loadProjects(compilationHandler: @escaping ()->())
     {
         let url = "https://api.cybergarden.ru/cases"
@@ -75,10 +90,10 @@ class MaindModel
             result in
             let data = JSON(result.data)
             
-            print("I Have Loaded Projects")
+            
             if result.response?.statusCode == 200
             {
-                var newCase = Case()
+                var newCase = Project()
                 var newTeam = Team()
                 var newMark = Mark()
                 
@@ -101,7 +116,7 @@ class MaindModel
                     }
                     self.projects[newCase.name] = newCase
                     
-                    print(self.projects.count)
+                    
                 }
                 self.namesOfProjects = self.projects.keys.sorted()
             }
@@ -123,6 +138,10 @@ class MaindModel
         return projects[nameOfProject]!.teams
     }
     
+    func getIdOfTeams(nameOfProject: String) -> String
+    {
+        return self.projects[nameOfProject]!.id
+    }
     func deleteDataOfUser()
     {
         
