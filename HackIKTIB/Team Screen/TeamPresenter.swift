@@ -15,15 +15,15 @@ class TeamPresenter
         [""]
     }
     
-     func updateOnePoint(title: String, point: Decimal)
-    {
-        model.writeOnePoint(title: title, point: point)
-    }
-//    func labelForNameOfTeam() -> UILabel
-//    {
-//        let labelForNameOfTeam = UILabel()
-//        labelForNameOfTeam.text =
-//    }
+    //     func updateOnePoint(title: String, point: Decimal)
+    //    {
+    //        model.writeOnePoint(title: title, point: point)
+    //    }
+    //    func labelForNameOfTeam() -> UILabel
+    //    {
+    //        let labelForNameOfTeam = UILabel()
+    //        labelForNameOfTeam.text =
+    //    }
     func nameOfTeam()->String
     {
         var name = model.getNameOfTeam()
@@ -37,10 +37,10 @@ class TeamPresenter
         
     }
     
-//    func writeNameOfTeam(name: String)
-//    {
-//        model.writeNameOfTeam(name: name)
-//    }
+    //    func writeNameOfTeam(name: String)
+    //    {
+    //        model.writeNameOfTeam(name: name)
+    //    }
     
     func typeOfMarkWithId(id: Int) -> String
     {
@@ -59,17 +59,72 @@ class TeamPresenter
         }
     }
     
-//    func writeIdOfTeam(name: String)
-//    {
-//        model.writeIdOfTeam(name: name)
-//    }
-//    
-//    func writeIdOfCase(name: String)
-//    {
-//        model.writeIdOfCase(name: name)
-//    }
+    //    func writeIdOfTeam(name: String)
+    //    {
+    //        model.writeIdOfTeam(name: name)
+    //    }
+    //
+    //    func writeIdOfCase(name: String)
+    //    {
+    //        model.writeIdOfCase(name: name)
+    //    }
     
-    func sendPoint(points: [String:String])
+    func getAlertController(navigationController: UINavigationController, sended: Bool) -> UIAlertController
+    {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        var ok = UIAlertAction()
+        if sended == true
+        {
+            alert.title = "🥳"
+            alert.message = "Оценка отправлена"
+            ok = UIAlertAction(title: "Вернуться к проектам", style: .default)
+            {
+                action in
+                let views = navigationController.viewControllers
+                
+                if views[0] is SignView
+                {
+                    navigationController.popToViewController(views[1], animated: true)
+                }
+                else
+                {
+                    navigationController.popToRootViewController(animated: true)
+                }
+            }
+            alert.addAction(ok)
+        }
+        else
+        {
+            alert.title = "Внимание"
+            alert.message = "Что-то пошло не так"
+            ok = UIAlertAction(title: "Попробовать снова", style: .default)
+            {
+                (action) in
+                self.model.updateToken()
+            }
+            alert.addAction(ok)
+        }
+        //        let alert = UIAlertController(title: "🥳", message: "Оценка отправлена", preferredStyle: .alert)
+        //        let ok = UIAlertAction(title: "Вернуться к проектам", style: .default)
+        //        {
+        //
+        //            action in
+        //            let views = navigationController.viewControllers
+        //            if views[0] is SignView
+        //            {
+        //                navigationController.popToViewController(views[1], animated: true)
+        //            }
+        //            else
+        //            {
+        //                navigationController.popToRootViewController(animated: true)
+        //            }
+        //        }
+        //        alert.addAction(ok)
+        
+        return alert
+    }
+    
+    func sendPoint(points: [String:String], compilationHandler: @escaping (Bool)->())
     {
         var newPoints = [String:Int]()
         for (key,value) in points
@@ -77,6 +132,10 @@ class TeamPresenter
             newPoints[key] = Int(value) ?? 0
         }
         model.sendPoint(points: newPoints)
+        {
+            sended in
+            compilationHandler(sended)
+        }
         
     }
     

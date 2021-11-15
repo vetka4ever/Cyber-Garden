@@ -16,15 +16,15 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let idCell = "cell"
     var tableView = UITableView()
     
-//    func writeTeams(teams: [String: Team])
-//    {
-//        presenter.updateTeams(teams: teams)
-//    }
-//    
-//    func writeId(id: String)
-//    {
-//        presenter.writeId(id: id)
-//    }
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        view.backgroundColor = .systemGray5
+        title = presenter.updateTitle()
+        setTableView()
+        setNavigationBar()
+        
+    }
     
     func setTableView()
     {
@@ -38,20 +38,11 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func setNavigationBar()
     {
+        self.navigationItem.titleView = projectLabel
 //        let rightButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfoAboutProject))
 //
 //        self.navigationItem.rightBarButtonItem = rightButton
 //        projectLabel.text = nameOfProject
-        self.navigationItem.titleView = projectLabel
-    }
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        view.backgroundColor = .systemGray5
-        title = presenter.updateTitle()
-        setTableView()
-        setNavigationBar()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -68,13 +59,13 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         let nameOfTeam = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let view = presenter.updateTeamView(nameOfTeam: nameOfTeam!)
         
         navigationController?.pushViewController(view, animated: true)
 //        let view = TeamView()
 //        view.writeNameOfTeam(name: presenter.nameOfTeam(id: indexPath.row))
-//
 //        navigationController?.pushViewController(view, animated: true)
     }
     
@@ -109,7 +100,4 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
 //        present(describeView, animated: true, completion: nil)
 //        
 //    }
-
-    
-    
 }

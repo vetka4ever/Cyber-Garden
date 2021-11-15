@@ -10,19 +10,18 @@ import UIKit
 class SignPresenter
 {
     private let model = SignModel()
+    
     func updateTitle() -> String
     {
         return model.getTitle()
     }
+    
     func getLogButtons(view: UIView) -> [UITextField]
     {
-        
         let buttons = [UITextField(), UITextField()]
         let heightForResize = view.frame.height / 9
         let weightForResize = view.frame.width - 20
-        
-        
-        
+
         for item in buttons
         {
             item.textColor = .black
@@ -46,14 +45,11 @@ class SignPresenter
                 item.returnKeyType = UIReturnKeyType.done
             }
         }
-        
-        
         return buttons
     }
     
     func updateData(login: String, password: String, compilationHandler: @escaping (UIViewController) ->())
     {
-        
         let alert: UIAlertController =
         {
             let alertController = UIAlertController(title: "Внимание", message: "Указаны неверный логин или пароль", preferredStyle: .alert)
@@ -62,59 +58,14 @@ class SignPresenter
         return alertController
         }()
         
-        let resultOfLogIn = model.getData(login: login, password: password)
+        model.getDataOfUser(login: login, password: password)
         {
             success in
             let view: UIViewController = ((success) ? MainScreen() : alert)
             compilationHandler(view)
         }
-        
-        
-        
-       
-        
-        
-        
     }
 }
 
-extension SignView
-{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        if textField == login
-        {
-            password.becomeFirstResponder()
-        }
-        else
-        {
-            textField.isSelected = false
-            let resultOfLogIn = presenter.updateData(login: login.text!, password: password.text!)
-            {
-                whatIShouldShow in
-                if whatIShouldShow is UIAlertController
-                {
-                    self.present(whatIShouldShow, animated: true, completion: nil)
-                }
-                else
-                {
-                    self.navigationController?.pushViewController(whatIShouldShow, animated: true)
-                }
-            }
-            
-            
-        }
-        return true
-    }
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
-        textField.placeholder = ""
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
-        textField.placeholder = ((textField == login) ? ("Логин") : ("Пароль") )
-    }
-}
+
+

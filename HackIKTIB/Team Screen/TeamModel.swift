@@ -25,14 +25,14 @@ class TeamModel
     private let project : Results<ProjectRealm> =
     {
         let project = (try! Realm()).objects(ProjectRealm.self)
-        print(project[0].data)
+        //        print(project[0].data)
         return project
     }()
     
-//    func getTeamDescribe() -> [String]
-//    {
-//        [""]
-//    }
+    //    func getTeamDescribe() -> [String]
+    //    {
+    //        [""]
+    //    }
     init()
     {
         idOfCase = project[0].data!.id
@@ -40,11 +40,11 @@ class TeamModel
         idOfTeam = project[0].data!.teams[nameOfTeam]!.id
     }
     
-    func writeOnePoint(title: String, point: Decimal)
-    {
-        self.points[title] = point
-        print(points)
-    }
+    //    func writeOnePoint(title: String, point: Decimal)
+    //    {
+    //        self.points[title] = point
+    //        print(points)
+    //    }
     func getTypeOfMarks(compilationHandler: @escaping ()->())
     {
         let url = "https://api.cybergarden.ru/system/appdata"
@@ -59,7 +59,7 @@ class TeamModel
                 {
                     self.typeOfMarks[key] = value.intValue
                 }
-                print(self.typeOfMarks)
+                //                print(self.typeOfMarks)
                 self.marks = self.typeOfMarks.keys.sorted()
             }
             compilationHandler()
@@ -88,41 +88,71 @@ class TeamModel
         return marks.count
     }
     
-//    func writeIdOfTeam(name: String)
-//    {
-//        self.idOfTeam = name
-//        print("id of team")
-//        print(name)
-//    }
-//
-//    func writeIdOfCase(name: String)
-//    {
-//        self.idOfCase = name
-//        print("id of case")
-//        print(name)
-//    }
-    
-    func sendPoint(points: [String:Int])
+    func updateToken()
     {
-        
-        
+        print("UPDATING TOKEN OF USER...")
+        let url = "https://api.cybergarden.ru/auth/login"
+        let parameter = AuthSend(login: user[0].data!.user.login, password: user[0].data!.user.password)
+        AF.request(url, method: .post, parameters: parameter).responseJSON
+        {
+            result in
+            let data = JSON(result.data)
+            result.response?.statusCode
+            if result.response?.statusCode == 200
+            {
+                var currentUser = AuthGet()
+                currentUser.user.firstName = data["user"]["firstName"].stringValue
+                currentUser.user.lastName = data["user"]["lastName"].stringValue
+                currentUser.user.id = data["user"]["id"].stringValue
+                currentUser.user.login = data["user"]["login"].stringValue
+                currentUser.user.password = self.user[0].data!.user.password
+                currentUser.token = data["token"].stringValue
+                
+                try! (try! Realm()).write
+                {
+                    self.user[0].data = currentUser
+                }
+            }
+            print(result.response?.statusCode == 200 ? ("UPDATED TOKEN OF USER: \(self.user[0].data?.token)") : ("TOKEN DIN'T UPDATE"))
+        }
+    }
+    
+    func sendPoint(points: [String:Int], compilationHandler: @escaping (Bool)->())
+    {
         let url = "https://api.cybergarden.ru/cases/\(idOfCase)/teams/\(idOfTeam)/marks"
         let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
         for (key,value) in points
         {
-            
             let parameters = MarkSend(markType: typeOfMarks[key]!, mark: value)
-            AF.request(url, method: .post, parameters: parameters, headers: headers).responseJSON
+            
+            let encoder = JSONParameterEncoder()
+            var sended = false
+            AF.request(url, method: .post, parameters: parameters, encoder: encoder, headers: headers).responseJSON
             {
                 response in
-                let data = JSON(response.data)
-                print(data)
-                print(self.typeOfMarks[key]!)
-                print(value)
-                print(response.response?.statusCode)
+                print("STATUS CODE RESPONSE OF MARK: \(response.response?.statusCode)")
+                if response.response?.statusCode == 200
+                {
+                    sended = true
+                }
+                compilationHandler(sended)
             }
-            
         }
-        
     }
+    //    func writeIdOfTeam(name: String)
+    //    {
+    //        self.idOfTeam = name
+    //        print("id of team")
+    //        print(name)
+    //    }
+    //
+    //    func writeIdOfCase(name: String)
+    //    {
+    //        self.idOfCase = name
+    //        print("id of case")
+    //        print(name)
+    //    }
+    
+    
+    
 }

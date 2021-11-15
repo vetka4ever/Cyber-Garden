@@ -10,7 +10,6 @@ import SwiftyJSON
 import Foundation
 class MaindModel
 {
-    
     private let title = "Проекты"
     private let realm = try! Realm()
     private var projects = [String:Project]()
@@ -21,7 +20,6 @@ class MaindModel
         return user
     }()
     
-    
     func updateToken(compilationHandler: @escaping ()->())
     {
         let url = "https://api.cybergarden.ru/auth/login"
@@ -30,9 +28,9 @@ class MaindModel
         {
             result in
             let data = JSON(result.data)
+            print("STATUS CODE OF UPDATE TOKEN: \(result.response?.statusCode)")
             if result.response?.statusCode == 200
             {
-                
                 var currentUser = AuthGet()
                 currentUser.user.firstName = data["user"]["firstName"].stringValue
                 currentUser.user.lastName = data["user"]["lastName"].stringValue
@@ -45,7 +43,6 @@ class MaindModel
                 {
                     self.user[0].data = currentUser
                 }
-                //                print(self.user[0].data?.token)
             }
             compilationHandler()
             
@@ -55,31 +52,26 @@ class MaindModel
     func saveProjectInLocalMamory(nameOfProject: String)
     {
         let project = realm.objects(ProjectRealm.self)
-        //        if project.count == 0
-        //        {
+        
         let object = ProjectRealm()
         object.data = self.projects[nameOfProject]
-
+        
         try! realm.write
         {
             project.count == 0 ? (self.realm.add(object) ): ( project[0].data = object.data)
         }
-        //        }
-        //        else
-        //        {
-        
-        
-        //        }
     }
     
     func getNameOfJury() -> String
     {
         var name = ""
-        guard let mayBeFirstName = user[0].data?.user.firstName else {return name}
-        guard let mayBeLastName = user[0].data?.user.lastName else {return name}
-        name = mayBeFirstName + " " + mayBeLastName
+        if user[0].data?.user.firstName != "" && user[0].data?.user.lastName != ""
+        {
+            name = user[0].data!.user.firstName + " " + user[0].data!.user.lastName
+        }
         return name
     }
+    
     func loadProjects(compilationHandler: @escaping ()->())
     {
         let url = "https://api.cybergarden.ru/cases"
@@ -90,7 +82,7 @@ class MaindModel
             result in
             let data = JSON(result.data)
             
-            
+            print("STATUS CODE OF LOAD PROJECTS: \(result.response?.statusCode)")
             if result.response?.statusCode == 200
             {
                 var newCase = Project()
@@ -116,35 +108,16 @@ class MaindModel
                     }
                     self.projects[newCase.name] = newCase
                     
-                    
                 }
-                self.namesOfProjects = self.projects.keys.sorted()
+//                self.namesOfProjects = self.projects.keys.sorted()
             }
             
             compilationHandler()
         }
         
     }
-    func getCountOfProjects() -> Int
-    {
-        return projects.count
-    }
-    func getProjectNames(key: Int) -> String
-    {
-        return namesOfProjects[key]
-    }
-    func getTeamsOfProject(nameOfProject: String) -> [String:Team]
-    {
-        return projects[nameOfProject]!.teams
-    }
-    
-    func getIdOfTeams(nameOfProject: String) -> String
-    {
-        return self.projects[nameOfProject]!.id
-    }
     func deleteDataOfUser()
     {
-        
         
         let url = "https://api.cybergarden.ru/auth/logout"
         let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
@@ -158,10 +131,36 @@ class MaindModel
                     headers).responseJSON
         {
             result in
-            print(result.response?.statusCode)
+            print("STATUS CODE OF DELETING USER: \(result.response?.statusCode)")
         }
         
     }
+    
+    func getCountOfProjects() -> Int
+    {
+        return projects.count
+    }
+    
+    func getProjectName(key: Int) -> String
+    {
+        return self.projects.keys.sorted()[key]
+    }
+    
+    func getTeamsOfProject(nameOfProject: String) -> [String:Team]
+    {
+        return projects[nameOfProject]!.teams
+    }
+    
+    func getIdOfTeams(nameOfProject: String) -> String
+    {
+        return self.projects[nameOfProject]!.id
+    }
+    
+    func getTitle() -> String
+    {
+        return title
+    }
+    
     //
     //    func getDataAboutProjects() -> [String]
     //    {
@@ -173,10 +172,6 @@ class MaindModel
     //        return infoProjects[key]
     //    }
     
-    func getTitle() -> String
-    {
-        return title
-    }
 }
 
 

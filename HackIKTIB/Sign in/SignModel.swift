@@ -15,18 +15,15 @@ class SignModel
     private let realm = try! Realm()
     private let title = "Авторизация"
     
-    func getData(login: String, password: String, compilationHandler: @escaping (Bool) ->())
+    func getDataOfUser(login: String, password: String, compilationHandler: @escaping (Bool) ->())
     {
         let url = "https://api.cybergarden.ru/auth/login"
         let parameter = AuthSend(login: login, password: password)
         var youCanEnter = false
         AF.request(url, method: .post, parameters: parameter).responseJSON
         {
-            
             result in
             let data = JSON(result.data)
-            
-//            print(data)
             if result.response?.statusCode == 200
             {
                 youCanEnter = true
@@ -37,7 +34,7 @@ class SignModel
                 user.user.id = data["user"]["id"].stringValue
                 user.user.login = data["user"]["login"].stringValue
                 user.token = data["token"].stringValue
-            
+                
                 try! self.realm.write
                 {
                     let realmUser = AuthGetRealm()
@@ -45,14 +42,14 @@ class SignModel
                     self.realm.add(realmUser)
                 }
             }
-            
+            print("STATUS CODE OF GETTING DATA OF USER \(result.response?.statusCode == 200)\n")
+           
             compilationHandler(youCanEnter)
         }
-        
         
     }
     func getTitle() -> String
     {
-        return title
+        return self.title
     }
 }

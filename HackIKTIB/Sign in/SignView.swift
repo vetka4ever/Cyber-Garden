@@ -9,22 +9,23 @@ import UIKit
 
 class SignView: UIViewController, UITextFieldDelegate
 {
+    private let presenter = SignPresenter()
+    private var login = UITextField()
+    private var password = UITextField()
     
-    let presenter = SignPresenter()
-    var login = UITextField()
-    var password = UITextField()
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray5
         
         navigationController?.navigationBar.prefersLargeTitles = true
         title = presenter.updateTitle()
+        view.backgroundColor = .systemGray5
         
+        //HIDING KEYBOARD WHEN USER TAP SCREEN
         let recognize = UITapGestureRecognizer(target: self, action: #selector(regTap(_:)))
         view.addGestureRecognizer(recognize)
         
+        // SET PASSWORD & LOGIN TEXT FIELDS
         let textFields = presenter.getLogButtons(view: view)
         login = textFields[0]
         password = textFields[1]
@@ -33,49 +34,40 @@ class SignView: UIViewController, UITextFieldDelegate
         
         view.addSubview(login)
         view.addSubview(password)
-        
-        
     }
+    
     
     @objc func regTap(_ sender: UITapGestureRecognizer)
     {
         view.endEditing(true)
     }
+    // SET TYPE OF RETURN BUTTON
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        if textField == login
+        {
+            password.becomeFirstResponder()
+        }
+        else
+        {
+            textField.endEditing(true)
+            presenter.updateData(login: login.text!, password: password.text!)
+            {
+                whatIShouldShow in
+                whatIShouldShow is UIAlertController ? (self.present(whatIShouldShow, animated: true, completion: nil)) : (self.navigationController?.pushViewController(whatIShouldShow, animated: true))
+            }
+        }
+        return true
+    }
+    // WHEN USER TAP LOGIN OR PASSWORD FIELD HE CAN SEE PLACEHOLDER & BLINKING STRIP IN THE SAME MOMENT.
+    // SO, I HIDE & SHOW PLACEHOLDERS WHEN USER BEGIN & STOP EDIT DATA
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        textField.placeholder = ""
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        textField.placeholder = ((textField == login) ? ("Логин") : ("Пароль") )
+    }
 }
-
-
-
-/*
- MARK: PREVIOUSLY log and password text fields
- func setLoginField()
- {
-     login.frame = CGRect(x: 10, y: self.view.frame.height / 4 , width: self.view.frame.width - 20, height: self.view.frame.height / 9)
-     login.layer.cornerRadius = 10
-     login.attributedPlaceholder = NSAttributedString(string: "Логин", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-     login.textColor = .black
-     login.font = UIFont(name: "Large", size: login.frame.height / 4)
-     login.backgroundColor = .white
-     
-     login.textAlignment = .center
-     login.returnKeyType = UIReturnKeyType.continue
-     login.delegate = self
-     self.view.addSubview(login)
- }
- func setPasswordView()
- {
-     password.frame = CGRect(x: 10, y: self.view.frame.height / 4 * 1.6 , width: login.frame.width, height: login.frame.height)
-     password.textColor = .black
-     password.font = UIFont(name: "Large", size: login.frame.height / 4)
-     password.layer.cornerRadius = 10
-     password.isSecureTextEntry = true
-     password.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-     
-     //        print(password.font?.fontName)
-     password.backgroundColor = .white
-     password.textAlignment = .center
-     password.returnKeyType = UIReturnKeyType.done
-     password.delegate = self
-     self.view.addSubview(password)
- }
- */

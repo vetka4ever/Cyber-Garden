@@ -10,11 +10,28 @@ import UIKit
 class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var presenter = MainPresenter()
-    private var nameLabel = UILabel()
     private var tableView = UITableView()
+    private let refreshControl = UIRefreshControl()
     private var idCell = "cell"
-    private var countOfProjects = 0
+    // MARK: LIFE CYCLE
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        view.backgroundColor = .systemGray5
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
+        self.view.addGestureRecognizer(swipe)
+        setTableView()
+       
+    }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        presenter.updateToken{}
+        presenter.loadProjects { self.tableView.reloadData() }
+        setNavigationBar()
+    }
+    //MARK: SET OF VIEW
     func setTableView()
     {
         tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
@@ -22,42 +39,28 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: idCell)
         tableView.backgroundColor = .systemGray5
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Обновление...")
+        refreshControl.addTarget(self, action: #selector(updateTableView(_:)), for: .valueChanged)
+        
+        tableView.refreshControl = refreshControl
         view.addSubview(tableView)
     }
     
     func setNavigationBar()
     {
-        self.navigationItem.titleView = presenter.getInfoLabel()
-        let image = UIImage.init(systemName: "power")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
-        let item = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(alertExit(_:)))
-        self.navigationItem.leftBarButtonItem = item
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = presenter.updateTitle()
+        self.navigationItem.title = presenter.getTitle()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.leftBarButtonItem = presenter.getLeftBarButtonItem()
+        self.navigationItem.titleView = presenter.getLabelOfNameOfUser()
+        //        let image = UIImage.init(systemName: "power")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+        //        let item = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(alertExit(_:)))
+        //        self.navigationItem.leftBarButtonItem = item
     }
-    
-    override func viewDidLoad()
+    //MARK: OBJECTIVE-C FUNCS
+    @objc func alertExit(_ sender: UISwipeGestureRecognizer)
     {
-        super.viewDidLoad()
-        view.backgroundColor = .systemGray5
-        setTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        presenter.updateToken{}
-        presenter.loadProjects
-        {
-            self.tableView.reloadData()
-        }
-        
-        setNavigationBar()
-    }
-    
-    
-    @objc func alertExit(_ sender: UIBarButtonItem)
-    {
+        guard sender.direction == .right else {return}
         let alert = UIAlertController(title: "Внимание", message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "Да", style: .destructive)
         { (action) in
@@ -70,52 +73,38 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         alert.addAction(ok)
         alert.addAction(no)
         self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @objc func updateTableView(_ sender: UIRefreshControl)
+    {
+        presenter.updateToken{}
+        presenter.loadProjects
+        {
+            self.tableView.reloadData()
+        }
+        refreshControl.endRefreshing()
     }
     
     //MARK: SET TABLE VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        var count = presenter.updateCountOfProjects()
+        let count = presenter.getCountOfProjects()
         return count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell)!
-        cell.textLabel?.text = presenter.updateProjectName(key: indexPath.row)
+        cell.textLabel?.text = presenter.getNameOfProject(key: indexPath.row)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let nameOfProject = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        let teamScreen = presenter.updateProjectView(nameOfProject: nameOfProject!)
+        let teamScreen = presenter.createProjectView(nameOfProject: nameOfProject!)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         navigationController?.pushViewController(teamScreen, animated: true)
     }
-    
-    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-//    {
-    //
-    //        let questionSwipe = UIContextualAction(style: .normal, title: "Подробнее")
-    //        { (action, view, success) in
-    //
-    //            self.showInfo(indexPath)
-    //        }
-    //
-    //        let image = UIImage(systemName: "questionmark.circle")
-    //        questionSwipe.image = image
-    //        questionSwipe.backgroundColor = .systemBlue
-    //        let swipe = UISwipeActionsConfiguration(actions: [questionSwipe])
-    //        swipe.performsFirstActionWithFullSwipe = false
-    //        return swipe
-    //
-    //    }
-    
-    //    func showInfo(_ indesPath: IndexPath)
-    //    {
-    //        let view = presenter.updateDescribeView(key: indesPath.row)
-    //        present(view, animated: true, completion: nil)
-    //    }
 }
-

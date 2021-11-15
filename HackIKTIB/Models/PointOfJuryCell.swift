@@ -17,7 +17,7 @@ class PointOfJuryCell: UITableViewCell, UITextFieldDelegate {
         title.frame = CGRect(x: 5, y: 0, width: self.frame.width / 2, height: self.frame.height)
         title.numberOfLines = 0
         title.textAlignment = .center
-        
+        title.textColor = .black
         let insetForCell = self.frame.height * 0.1
         let newHeight = self.frame.height - insetForCell * 2
         
