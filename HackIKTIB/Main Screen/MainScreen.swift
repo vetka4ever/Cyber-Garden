@@ -21,14 +21,21 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
         self.view.addGestureRecognizer(swipe)
         setTableView()
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        presenter.updateToken{}
-        presenter.loadProjects { self.tableView.reloadData() }
+        presenter.updateToken
+        {
+            self.presenter.loadProjects
+            {
+                self.tableView.reloadData()
+                self.presenter.typeOfMarks { }
+            }
+        }
+       
         setNavigationBar()
     }
     //MARK: SET OF VIEW
@@ -78,10 +85,13 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc func updateTableView(_ sender: UIRefreshControl)
     {
-        presenter.updateToken{}
-        presenter.loadProjects
+        presenter.updateToken
         {
-            self.tableView.reloadData()
+            self.presenter.loadProjects
+            {
+                self.tableView.reloadData()
+                self.presenter.typeOfMarks { }
+            }
         }
         refreshControl.endRefreshing()
     }
@@ -106,5 +116,23 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let teamScreen = presenter.createProjectView(nameOfProject: nameOfProject!)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         navigationController?.pushViewController(teamScreen, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let projectName = tableView.cellForRow(at: indexPath)!.textLabel!.text
+        let questionSwipe = UIContextualAction(style: .normal, title: "Подробнее")
+        { (action, view, success) in
+            let descriptionView = self.presenter.createDescribeView(nameOfProject: projectName!)
+            self.present(descriptionView, animated: true, completion: nil)
+        }
+        questionSwipe.image = UIImage(systemName: "questionmark.circle")
+        questionSwipe.backgroundColor = .systemBlue
+        let swipe = UISwipeActionsConfiguration(actions: [questionSwipe])
+        swipe.performsFirstActionWithFullSwipe = false
+        
+        return swipe
+        
+        
     }
 }

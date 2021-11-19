@@ -11,21 +11,22 @@ import UIKit
 class TeamModel
 {
     private var title = "Оценка команды"
-    private var idOfCase = ""
-    private var idOfTeam = ""
-    private var typeOfMarks = [String:Int]()
+//    private var typeOfMarks = [String:Int]()
+    private let typeOfMarks : Results<TypeOfMarkRealm> =
+    {
+        let types = (try! Realm()).objects(TypeOfMarkRealm.self)
+        return types
+    }()
     private var marks = [String]()
-    private var points = [String : Decimal]()
-    private var nameOfTeam = ""
     private let user : Results<AuthGetRealm> =
     {
         let user = (try! Realm()).objects(AuthGetRealm.self)
         return user
     }()
-    private let project : Results<ProjectRealm> =
+    private let project : Results<KeepingProjectRealm> =
     {
-        let project = (try! Realm()).objects(ProjectRealm.self)
-        //        print(project[0].data)
+        let project = (try! Realm()).objects(KeepingProjectRealm.self)
+//                print(project[0].data)
         return project
     }()
     
@@ -33,44 +34,61 @@ class TeamModel
     //    {
     //        [""]
     //    }
-    init()
-    {
-        idOfCase = project[0].data!.id
-        nameOfTeam = project[0].data!.teams.keys.first!
-        idOfTeam = project[0].data!.teams[nameOfTeam]!.id
-    }
     
     //    func writeOnePoint(title: String, point: Decimal)
     //    {
     //        self.points[title] = point
     //        print(points)
     //    }
-    func getTypeOfMarks(compilationHandler: @escaping ()->())
-    {
-        let url = "https://api.cybergarden.ru/system/appdata"
-        let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
-        AF.request(url, method: .get, headers: headers).responseJSON
-        {
-            response in
-            if response.response?.statusCode == 200
-            {
-                let data = JSON(response.data)["markType"].dictionaryValue
-                for (key,value) in data
-                {
-                    self.typeOfMarks[key] = value.intValue
-                }
-                //                print(self.typeOfMarks)
-                self.marks = self.typeOfMarks.keys.sorted()
-            }
-            compilationHandler()
-        }
-    }
+//    func getTypeOfMarks(compilationHandler: @escaping ()->())
+//    {
+//        let url = "https://api.cybergarden.ru/system/appdata"
+//        let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
+//        AF.request(url, method: .get, headers: headers).responseJSON
+//        {
+//            response in
+//            if response.response?.statusCode == 200
+//            {
+//                let data = JSON(response.data)["markType"].dictionaryValue
+//                for (key,value) in data
+//                {
+//                    self.typeOfMarks[key] = value.intValue
+//                }
+//                //                print(self.typeOfMarks)
+//                self.marks = self.typeOfMarks.keys.sorted()
+//            }
+//            compilationHandler()
+//        }
+//    }
     
     func getNameOfTeam() -> String
     {
-        return nameOfTeam
+        return project[0].data!.teams.keys.first!
     }
     
+    func getDataAboutTeam() -> String
+    {
+        return project[0].data!.teams.first!.value.description
+//        var nameOfTeam = project[0].data!.teams.first!.key
+//        description += "\n\nВаша оценка:\n"
+//        let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
+////        let typeOfmark = typeOfMarks[0].data!.markType
+////        {
+////
+////            let point =
+////        }
+////        for item in project[0].data!.teams[nameOfTeam]!.marks
+//        for item in idOfMark
+//        {
+//            description += item + " - "
+//            let markId = typeOfMarks[0].data!.markType[item]
+//            description += "\(project[0].data!.teams[nameOfTeam]!.marks[markId!]!.mark)\n"
+//
+////            description += typeOfMarks[0].data!.markType[item]
+////            item.value.markType
+//        }
+//        return description
+    }
     
     
     func getTitle()->String
@@ -80,12 +98,12 @@ class TeamModel
     
     func getTypeOfMarkWithId(id: Int) -> String
     {
-        return marks[id]
+        return typeOfMarks[0].data!.markType.keys.sorted()[id]
     }
     
     func getCountOfTypeOfMarkWithId() -> Int
     {
-        return marks.count
+        return typeOfMarks[0].data!.markType.count
     }
     
     func updateToken()
@@ -119,11 +137,14 @@ class TeamModel
     
     func sendPoint(points: [String:Int], compilationHandler: @escaping (Bool)->())
     {
+        
+        let idOfCase =  project[0].data!.id
+        let idOfTeam = project[0].data!.teams.first!.value.id
         let url = "https://api.cybergarden.ru/cases/\(idOfCase)/teams/\(idOfTeam)/marks"
         let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
         for (key,value) in points
         {
-            let parameters = MarkSend(markType: typeOfMarks[key]!, mark: value)
+            let parameters = MarkSend(markType: typeOfMarks[0].data!.markType[key]!, mark: value)
             
             let encoder = JSONParameterEncoder()
             var sended = false
@@ -138,21 +159,23 @@ class TeamModel
                 compilationHandler(sended)
             }
         }
+        
     }
-    //    func writeIdOfTeam(name: String)
-    //    {
-    //        self.idOfTeam = name
-    //        print("id of team")
-    //        print(name)
-    //    }
-    //
-    //    func writeIdOfCase(name: String)
-    //    {
-    //        self.idOfCase = name
-    //        print("id of case")
-    //        print(name)
-    //    }
     
-    
+    func getPlaceholder(typeOfPoint: String) -> Int
+    {
+        let idOfPoint = typeOfMarks[0].data!.markType[typeOfPoint]!
+        var placeholder = 0
+        for (item) in project[0].data!.teams.first!.value.marks
+        {
+//            print(item)
+            if item.key == idOfPoint
+            {
+                placeholder = item.value.mark
+                break
+            }
+        }
+        return placeholder
+    }
     
 }

@@ -27,20 +27,36 @@ class ProjectPresenter
         
     }
     
+    func nameOfProject() -> String
+    {
+        return model.getNameOfProject();
+    }
+    
     func updateTeamView(nameOfTeam: String) -> TeamView
     {
-//        model.correctTeams(nameOfTeam: nameOfTeam)
+        model.editKeepingProject(nameOfTeam: nameOfTeam)
         let view = TeamView()
         return view
     }
     
-    //    func updateDescribeView(title: String) -> UINavigationController
-    //    {
-    //        let view = DescribeView()
-    //        view.title = title
-    //        let describeView = UINavigationController(rootViewController: view)
-    //
-    //        return describeView
-    //    }
+    func createDescriptionOfTeamView(nameOfTeam: String) -> UINavigationController
+    {
+        let descriptionView = DescriptionView()
+        descriptionView.title = nameOfTeam
+        descriptionView.setDescription(description: model.getDataAboutOneTeam(nameOfTeam: nameOfTeam))
+        let describeView = UINavigationController(rootViewController: descriptionView)
+        
+        return describeView
+    }
+    
+    func createDescriptionOfProjectView() -> UINavigationController
+    {
+        let descriptionView = DescriptionView()
+        descriptionView.title = model.getNameOfProject()
+        descriptionView.setDescription(description: model.getDataAboutProject())
+        let navigationController = UINavigationController(rootViewController: descriptionView)
+        
+        return navigationController
+    }
     
 }

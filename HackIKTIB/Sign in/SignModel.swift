@@ -42,12 +42,14 @@ class SignModel
                     self.realm.add(realmUser)
                 }
             }
-            print("STATUS CODE OF GETTING DATA OF USER \(result.response?.statusCode == 200)\n")
-           
+            print("STATUS CODE OF GETTING DATA OF USER \(result.response?.statusCode)\n")
             compilationHandler(youCanEnter)
         }
         
     }
+    
+    
+    
     func getTitle() -> String
     {
         return self.title

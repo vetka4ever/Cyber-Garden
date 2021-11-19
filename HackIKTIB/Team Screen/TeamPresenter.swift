@@ -15,15 +15,7 @@ class TeamPresenter
         [""]
     }
     
-    //     func updateOnePoint(title: String, point: Decimal)
-    //    {
-    //        model.writeOnePoint(title: title, point: point)
-    //    }
-    //    func labelForNameOfTeam() -> UILabel
-    //    {
-    //        let labelForNameOfTeam = UILabel()
-    //        labelForNameOfTeam.text =
-    //    }
+    
     func nameOfTeam()->String
     {
         var name = model.getNameOfTeam()
@@ -34,13 +26,21 @@ class TeamPresenter
     {
         var title = model.getTitle()
         return title
-        
     }
     
-    //    func writeNameOfTeam(name: String)
-    //    {
-    //        model.writeNameOfTeam(name: name)
-    //    }
+    func placeholder(typeOfPoint: String) -> Int
+    {
+        return model.getPlaceholder(typeOfPoint: typeOfPoint)
+    }
+    
+    func createDescriptionOfTeamView() -> UINavigationController
+    {
+        let desctiptionView = DescriptionView()
+        desctiptionView.title = model.getNameOfTeam()
+        desctiptionView.setDescription(description: model.getDataAboutTeam())
+        let navigationController = UINavigationController(rootViewController: desctiptionView)
+        return navigationController
+    }
     
     func typeOfMarkWithId(id: Int) -> String
     {
@@ -52,22 +52,13 @@ class TeamPresenter
         return model.getCountOfTypeOfMarkWithId()
     }
     
-    func updateTypeOfMark(compilationHandler: @escaping ()->())
-    {
-        model.getTypeOfMarks {
-            compilationHandler()
-        }
-    }
+//    func updateTypeOfMark(compilationHandler: @escaping ()->())
+//    {
+//        model.getTypeOfMarks {
+//            compilationHandler()
+//        }
+//    }
     
-    //    func writeIdOfTeam(name: String)
-    //    {
-    //        model.writeIdOfTeam(name: name)
-    //    }
-    //
-    //    func writeIdOfCase(name: String)
-    //    {
-    //        model.writeIdOfCase(name: name)
-    //    }
     
     func getAlertController(navigationController: UINavigationController, sended: Bool) -> UIAlertController
     {

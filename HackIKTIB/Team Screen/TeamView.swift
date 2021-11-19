@@ -11,7 +11,8 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     
     private var tableView = UITableView()
-    private var teamName = ""
+    private let labelForNameOfTeam = UILabel()
+//    private var teamName = ""
     private var presenter = TeamPresenter()
     private var idCell = "Cell"
     
@@ -22,23 +23,17 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
         //HIDING KEYBOARD WHEN USER TAP SCREEN
         let gesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
         self.view.addGestureRecognizer(gesture)
-        
-        
-        
-        
-        
         setTableView()
         title = presenter.title()
-        teamName = presenter.nameOfTeam()
         
         
-        let labelForNameOfTeam = UILabel()
-        labelForNameOfTeam.text = teamName
+        
+        labelForNameOfTeam.text = presenter.nameOfTeam()
         self.navigationItem.titleView = labelForNameOfTeam
         let sendButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"), style: .plain, target: self, action: #selector(sendPoint))
-//        let questionButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfo))
-//        self.navigationItem.rightBarButtonItems = [sendButton, questionButton]
-        self.navigationItem.rightBarButtonItems = [sendButton]
+        let questionButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfo))
+        self.navigationItem.rightBarButtonItems = [sendButton, questionButton]
+//        self.navigationItem.rightBarButtonItems = [sendButton]
         
         
         view.backgroundColor = .systemGray5
@@ -47,7 +42,7 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        presenter.updateTypeOfMark { self.tableView.reloadData() }
+//        presenter.updateTypeOfMark { self.tableView.reloadData() }
     }
    
     func setTableView()
@@ -69,11 +64,8 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @objc func showInfo()
     {
-        let view = DescribeView()
-        view.title =  teamName
-        print(view.title)
-        let describeView = UINavigationController(rootViewController: view)
-        present(describeView, animated: true, completion: nil)
+        let descriptionView = presenter.createDescriptionOfTeamView()
+        present(descriptionView, animated: true, completion: nil)
     }
     
     @objc func sendPoint()
@@ -104,6 +96,10 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as! PointOfJuryCell
         cell.selectionStyle = .none
         cell.setTitle(title: presenter.typeOfMarkWithId(id: indexPath.row))
+        let point = presenter.placeholder(typeOfPoint: cell.getTitle())
+//        print(point)
+        cell.setPlaceHolder(point: point)
+//        cell.reloadInputViews()
         cell.backgroundColor = .white
         return cell
     }

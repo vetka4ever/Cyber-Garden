@@ -11,7 +11,7 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
    
 
     var id = 0
-    var projectLabel = UILabel()
+    var viewWithNameOfTeam = UILabel()
     let presenter = ProjectPresenter()
     let idCell = "cell"
     var tableView = UITableView()
@@ -38,11 +38,12 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func setNavigationBar()
     {
-        self.navigationItem.titleView = projectLabel
-//        let rightButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfoAboutProject))
+        viewWithNameOfTeam.text = presenter.nameOfProject()
+        self.navigationItem.titleView = viewWithNameOfTeam
+        let rightButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfoAboutProject))
 //
-//        self.navigationItem.rightBarButtonItem = rightButton
-//        projectLabel.text = nameOfProject
+        self.navigationItem.rightBarButtonItem = rightButton
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -69,20 +70,23 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
 //        navigationController?.pushViewController(view, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-//    {
-//        let questionSwipe = UIContextualAction(style: .normal, title: "Подробнее")
-//        { (action, view, success) in
-//            self.showInfoAboutTeam(key: indexPath.row)
-//        }
-//        questionSwipe.image = UIImage(systemName: "questionmark.circle")
-//        questionSwipe.backgroundColor = .systemBlue
-//        let swipe = UISwipeActionsConfiguration(actions: [questionSwipe])
-//        swipe.performsFirstActionWithFullSwipe = false
-//        
-//        return swipe
-//        
-//    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let teamName = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let questionSwipe = UIContextualAction(style: .normal, title: "Подробнее")
+        { (action, view, success) in
+            let describeView = self.presenter.createDescriptionOfTeamView(nameOfTeam: teamName!)
+            self.present(describeView, animated: true, completion: nil)
+        }
+        questionSwipe.image = UIImage(systemName: "questionmark.circle")
+        questionSwipe.backgroundColor = .systemBlue
+        let swipe = UISwipeActionsConfiguration(actions: [questionSwipe])
+        swipe.performsFirstActionWithFullSwipe = false
+        
+        return swipe
+        
+    }
+    
 //    @objc func showInfoAboutTeam(key: Int)
 //    {
 //        let view = DescribeView()
@@ -94,10 +98,10 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
 //        
 //    }
 //
-//    @objc func showInfoAboutProject()
-//    {
-//        let describeView = presenter.updateDescribeView(title: projectLabel.text!)
-//        present(describeView, animated: true, completion: nil)
-//        
-//    }
+    @objc func showInfoAboutProject()
+    {
+        let describeView = presenter.createDescriptionOfProjectView()
+        present(describeView, animated: true, completion: nil)
+        
+    }
 }

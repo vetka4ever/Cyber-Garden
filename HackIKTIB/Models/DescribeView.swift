@@ -7,25 +7,29 @@
 
 import UIKit
 
-class DescribeView: UIViewController {
+class DescriptionView: UIViewController {
 
-    var describe = UITextView()
+    private var descriptionView = UITextView()
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         
-        describe.frame = view.frame
-        describe.textAlignment = .center
-        describe.isEditable = false
-        describe.isSelectable = false
+        descriptionView.frame = view.frame
+        descriptionView.textAlignment = .center
+        descriptionView.isEditable = false
+        descriptionView.isSelectable = false
         navigationController?.navigationBar.backgroundColor = .systemGray5
 //        view.backgroundColor =
         navigationController?.navigationBar.prefersLargeTitles = false
-        view.addSubview(describe)
-        
+        view.addSubview(descriptionView)
     }
     
+    func setDescription(description: String)
+    {
+        self.descriptionView.text = description
+    }
 
     /*
     // MARK: - Navigation

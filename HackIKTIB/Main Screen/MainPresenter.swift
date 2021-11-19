@@ -51,6 +51,12 @@ class MainPresenter
         model.updateToken { compilationHandler() }
     }
     
+    func typeOfMarks(compilationHandler: @escaping() -> ())
+    {
+        model.getTypeOfMarks { compilationHandler() }
+    }
+    
+    
     func createProjectView(nameOfProject: String) -> ProjectView
     {
         model.saveProjectInLocalMamory(nameOfProject: nameOfProject)
@@ -63,17 +69,14 @@ class MainPresenter
         return model.getTitle()
     }
     
-    //    func updateDataAboutProject() -> [String]
-    //    {
-    //        return model.getDataAboutProjects()
-    //    }
-    
-    //    func updateDescribeView(key: Int) -> UINavigationController
-    //    {
-    //        let view = DescribeView()
-    //        view.title = model.getProjectNames(key)
-    //        view.describe.text = model.getDataAboutOneProject(key: key)
-    //        let navigationController = UINavigationController(rootViewController: view)
-    //        return navigationController
-    //    }
+    func createDescribeView(nameOfProject: String) -> UINavigationController
+    {
+        
+        let describeView = DescriptionView()
+        describeView.setDescription(description: model.getDescriptionAboutOneProject(nameOfProject: nameOfProject))
+        describeView.title = nameOfProject
+        
+        let navigationController = UINavigationController(rootViewController: describeView)
+        return navigationController
+    }
 }

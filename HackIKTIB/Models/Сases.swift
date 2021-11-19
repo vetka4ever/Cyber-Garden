@@ -13,6 +13,7 @@ struct Project: Codable {
     var id: String = ""
     var name: String = ""
     var teams = [String:Team]()
+    var description = ""
 }
 
 // MARK: - Team
@@ -20,6 +21,7 @@ struct Team: Codable {
     var id: String = ""
     var name: String = ""
     var marks = [Int:Mark]()
+    var description = ""
 }
 
 // MARK: - Mark
@@ -30,6 +32,26 @@ struct Mark: Codable {
 }
 
 class ProjectRealm : Object
+{
+    @objc private dynamic var classData: Data? = nil
+    var data: Project?
+    {
+        get
+        {
+            if let currentData = classData
+            {
+                return try? JSONDecoder().decode(Project.self, from: currentData)
+            }
+            return nil
+        }
+        set
+        {
+            classData = try? JSONEncoder().encode(newValue)
+        }
+    }
+}
+
+class KeepingProjectRealm : Object
 {
     @objc private dynamic var classData: Data? = nil
     var data: Project?

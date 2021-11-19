@@ -13,7 +13,7 @@ class MaindModel
     private let title = "Проекты"
     private let realm = try! Realm()
     private var projects = [String:Project]()
-    private var namesOfProjects = [String]()
+
     private let user : Results<AuthGetRealm> =
     {
         let user = (try! Realm()).objects(AuthGetRealm.self)
@@ -51,15 +51,28 @@ class MaindModel
     
     func saveProjectInLocalMamory(nameOfProject: String)
     {
+        // One data type for having accesse to data base from any screen
+        // Second for keeping one copy for sending mark
         let project = realm.objects(ProjectRealm.self)
+//        let keepingProject = realm.objects(KeepingProjectRealm.self)
         
         let object = ProjectRealm()
+//        let objectForKeepingDataType = KeepingProjectRealm()
+        
         object.data = self.projects[nameOfProject]
+//        objectForKeepingDataType.data = self.projects[nameOfProject]
         
         try! realm.write
         {
-            project.count == 0 ? (self.realm.add(object) ): ( project[0].data = object.data)
+            project.count == 0 ? (self.realm.add(object)): ( project[0].data = object.data)
         }
+        
+//        try! realm.write
+//        {
+//            keepingProject.count == 0 ? (self.realm.add(objectForKeepingDataType)): ( keepingProject[0].data = objectForKeepingDataType.data)
+//        }
+        
+        
     }
     
     func getNameOfJury() -> String
@@ -93,10 +106,12 @@ class MaindModel
                 {
                     newCase.id = loadedCase["id"].stringValue
                     newCase.name = loadedCase["name"].stringValue
+                    newCase.description = loadedCase["description"].stringValue
                     for team in loadedCase["teams"].arrayValue
                     {
                         newTeam.id = team["id"].stringValue
                         newTeam.name = team["name"].stringValue
+                        newTeam.description = team["description"].stringValue
                         for mark in team["marks"].arrayValue
                         {
                             newMark.id = mark["id"].stringValue
@@ -105,7 +120,9 @@ class MaindModel
                             newTeam.marks[newMark.markType] = newMark
                         }
                         newCase.teams[newTeam.name] = newTeam
+//                        print(newCase)
                     }
+//                    print(newCase)
                     self.projects[newCase.name] = newCase
                     
                 }
@@ -114,7 +131,51 @@ class MaindModel
             
             compilationHandler()
         }
-        
+    }
+    
+    func getTypeOfMarks(compilationHandler: @escaping ()->())
+    {
+        let url = "https://api.cybergarden.ru/system/appdata"
+        let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
+        AF.request(url, method: .get, headers: headers).responseJSON
+        {
+            response in
+            let markInRealm = self.realm.objects(TypeOfMarkRealm.self)
+            var marks = MarkDictionary()
+            print("STATUS CODE OF LOAD TYPE OF MARKS: \(response.response?.statusCode)")
+            if response.response?.statusCode == 200
+            {
+                let data = JSON(response.data)["markType"].dictionaryValue
+                for (key,value) in data
+                {
+                    marks.markType[key] = value.intValue
+                }
+                //                print(self.typeOfMarks)
+                try! self.realm.write
+                {
+                    let object = TypeOfMarkRealm()
+                    object.data = marks
+                    print(marks)
+//                    markInRealm.count == 0 ? ( self.realm.add(object)) :(markInRealm[0].data = object.data)
+                    if  markInRealm.count == 0
+                    {
+                        self.realm.add(object)
+                    }
+                    else
+                    {
+                        markInRealm[0].data = object.data
+                    }
+                   
+                }
+            }
+            compilationHandler()
+        }
+    }
+    
+    
+    func getDescriptionAboutOneProject(nameOfProject: String) -> String
+    {
+        return projects[nameOfProject]!.description
     }
     func deleteDataOfUser()
     {
