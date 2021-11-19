@@ -55,6 +55,7 @@ class ProjectModel
     {
         
         var description = project[0].data!.teams[nameOfTeam]!.description
+        print(project[0].data)
         if project[0].data?.teams[nameOfTeam]?.marks.count != 0
         {
             description += "\n\nВаша оценка:\n"
@@ -73,7 +74,9 @@ class ProjectModel
     func editKeepingProject(nameOfTeam: String)
     {
         let kurrentKeepingProject = realm.objects(KeepingProjectRealm.self)
+//        print(kurrentKeepingProject[0].data)
         var keepingProj = project[0].data
+        print(keepingProj)
         for (key, _) in keepingProj!.teams
         {
             if key != nameOfTeam

@@ -64,6 +64,14 @@ class MaindModel
         
         try! realm.write
         {
+//            if project.count == 0
+//            {
+//                self.realm.add(object)
+//            }
+//            else
+//            {
+//                project[0].data = object.data
+//            }
             project.count == 0 ? (self.realm.add(object)): ( project[0].data = object.data)
         }
         
@@ -94,26 +102,29 @@ class MaindModel
         {
             result in
             let data = JSON(result.data)
-            
+            print(data)
             print("STATUS CODE OF LOAD PROJECTS: \(result.response?.statusCode)")
             if result.response?.statusCode == 200
             {
-                var newCase = Project()
-                var newTeam = Team()
-                var newMark = Mark()
+                
+                
+                
                 
                 for loadedCase in data["cases"].arrayValue
                 {
+                    var newCase = Project()
                     newCase.id = loadedCase["id"].stringValue
                     newCase.name = loadedCase["name"].stringValue
                     newCase.description = loadedCase["description"].stringValue
                     for team in loadedCase["teams"].arrayValue
                     {
+                        var newTeam = Team()
                         newTeam.id = team["id"].stringValue
                         newTeam.name = team["name"].stringValue
                         newTeam.description = team["description"].stringValue
                         for mark in team["marks"].arrayValue
                         {
+                            var newMark = Mark()
                             newMark.id = mark["id"].stringValue
                             newMark.mark = mark["mark"].intValue
                             newMark.markType = mark["markType"].intValue
@@ -122,9 +133,12 @@ class MaindModel
                         newCase.teams[newTeam.name] = newTeam
 //                        print(newCase)
                     }
-//                    print(newCase)
+                    print(newCase.name)
+                    print(newCase.teams.count)
                     self.projects[newCase.name] = newCase
-                    
+//                    newCase = Project()
+//                    newTeam = Team()
+//                    newMark = Mark()
                 }
 //                self.namesOfProjects = self.projects.keys.sorted()
             }

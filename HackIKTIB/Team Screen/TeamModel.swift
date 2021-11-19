@@ -15,6 +15,7 @@ class TeamModel
     private let typeOfMarks : Results<TypeOfMarkRealm> =
     {
         let types = (try! Realm()).objects(TypeOfMarkRealm.self)
+        print(types)
         return types
     }()
     private var marks = [String]()
@@ -26,7 +27,7 @@ class TeamModel
     private let project : Results<KeepingProjectRealm> =
     {
         let project = (try! Realm()).objects(KeepingProjectRealm.self)
-        //                print(project[0].data)
+        print(project[0].data?.teams)
         return project
     }()
     
@@ -146,6 +147,8 @@ class TeamModel
         let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
         for (key,value) in points
         {
+            print(typeOfMarks[0].data!.markType[key])
+            print(value)
             let parameters = MarkSend(markType: typeOfMarks[0].data!.markType[key]!, mark: value)
             
             let encoder = JSONParameterEncoder()
@@ -154,6 +157,7 @@ class TeamModel
             {
                 response in
                 print("STATUS CODE RESPONSE OF MARK: \(response.response?.statusCode)")
+                print(JSON(response.data))
                 if response.response?.statusCode == 200
                 {
                     sended = true

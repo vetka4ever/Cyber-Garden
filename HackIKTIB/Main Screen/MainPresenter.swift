@@ -23,7 +23,8 @@ class MainPresenter
     // METHOD FOR GETTING ITEM FOR HIDING LEFT BAR BUTTON OF NAVIGATION ITEM IN SIGN IN VIEW
     func getLeftBarButtonItem() -> UIBarButtonItem
     {
-        return UIBarButtonItem(image: nil, style: .done, target: self, action: nil)
+        return UIBarButtonItem(image: UIImage.init(systemName: "chevron.backward"), style: .done, target: self, action: nil)
+        //UIImage.init(systemName: "chevron.backward")
     }
     
     func loadProjects(compilationHandler: @escaping ()->())

@@ -54,6 +54,7 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
     }
     
+     
     func setNavigationBar()
     {
         self.navigationItem.title = presenter.getTitle()
