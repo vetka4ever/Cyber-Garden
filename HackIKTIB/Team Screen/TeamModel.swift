@@ -11,7 +11,7 @@ import UIKit
 class TeamModel
 {
     private var title = "Оценка команды"
-//    private var typeOfMarks = [String:Int]()
+    //    private var typeOfMarks = [String:Int]()
     private let typeOfMarks : Results<TypeOfMarkRealm> =
     {
         let types = (try! Realm()).objects(TypeOfMarkRealm.self)
@@ -26,7 +26,7 @@ class TeamModel
     private let project : Results<KeepingProjectRealm> =
     {
         let project = (try! Realm()).objects(KeepingProjectRealm.self)
-//                print(project[0].data)
+        //                print(project[0].data)
         return project
     }()
     
@@ -40,26 +40,26 @@ class TeamModel
     //        self.points[title] = point
     //        print(points)
     //    }
-//    func getTypeOfMarks(compilationHandler: @escaping ()->())
-//    {
-//        let url = "https://api.cybergarden.ru/system/appdata"
-//        let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
-//        AF.request(url, method: .get, headers: headers).responseJSON
-//        {
-//            response in
-//            if response.response?.statusCode == 200
-//            {
-//                let data = JSON(response.data)["markType"].dictionaryValue
-//                for (key,value) in data
-//                {
-//                    self.typeOfMarks[key] = value.intValue
-//                }
-//                //                print(self.typeOfMarks)
-//                self.marks = self.typeOfMarks.keys.sorted()
-//            }
-//            compilationHandler()
-//        }
-//    }
+    //    func getTypeOfMarks(compilationHandler: @escaping ()->())
+    //    {
+    //        let url = "https://api.cybergarden.ru/system/appdata"
+    //        let headers: HTTPHeaders = ["authorization": "Bearer " + self.user[0].data!.token]
+    //        AF.request(url, method: .get, headers: headers).responseJSON
+    //        {
+    //            response in
+    //            if response.response?.statusCode == 200
+    //            {
+    //                let data = JSON(response.data)["markType"].dictionaryValue
+    //                for (key,value) in data
+    //                {
+    //                    self.typeOfMarks[key] = value.intValue
+    //                }
+    //                //                print(self.typeOfMarks)
+    //                self.marks = self.typeOfMarks.keys.sorted()
+    //            }
+    //            compilationHandler()
+    //        }
+    //    }
     
     func getNameOfTeam() -> String
     {
@@ -69,25 +69,25 @@ class TeamModel
     func getDataAboutTeam() -> String
     {
         return project[0].data!.teams.first!.value.description
-//        var nameOfTeam = project[0].data!.teams.first!.key
-//        description += "\n\nВаша оценка:\n"
-//        let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
-////        let typeOfmark = typeOfMarks[0].data!.markType
-////        {
-////
-////            let point =
-////        }
-////        for item in project[0].data!.teams[nameOfTeam]!.marks
-//        for item in idOfMark
-//        {
-//            description += item + " - "
-//            let markId = typeOfMarks[0].data!.markType[item]
-//            description += "\(project[0].data!.teams[nameOfTeam]!.marks[markId!]!.mark)\n"
-//
-////            description += typeOfMarks[0].data!.markType[item]
-////            item.value.markType
-//        }
-//        return description
+        //        var nameOfTeam = project[0].data!.teams.first!.key
+        //        description += "\n\nВаша оценка:\n"
+        //        let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
+        ////        let typeOfmark = typeOfMarks[0].data!.markType
+        ////        {
+        ////
+        ////            let point =
+        ////        }
+        ////        for item in project[0].data!.teams[nameOfTeam]!.marks
+        //        for item in idOfMark
+        //        {
+        //            description += item + " - "
+        //            let markId = typeOfMarks[0].data!.markType[item]
+        //            description += "\(project[0].data!.teams[nameOfTeam]!.marks[markId!]!.mark)\n"
+        //
+        ////            description += typeOfMarks[0].data!.markType[item]
+        ////            item.value.markType
+        //        }
+        //        return description
     }
     
     
@@ -159,20 +159,22 @@ class TeamModel
                 compilationHandler(sended)
             }
         }
-        
     }
     
     func getPlaceholder(typeOfPoint: String) -> Int
     {
-        let idOfPoint = typeOfMarks[0].data!.markType[typeOfPoint]!
-        var placeholder = 0
-        for (item) in project[0].data!.teams.first!.value.marks
+        var placeholder = -1
+        if project[0].data?.teams.first?.value.marks.count != 0
         {
-//            print(item)
-            if item.key == idOfPoint
+            let idOfPoint = typeOfMarks[0].data!.markType[typeOfPoint]!
+            
+            for (item) in project[0].data!.teams.first!.value.marks
             {
-                placeholder = item.value.mark
-                break
+                if item.key == idOfPoint
+                {
+                    placeholder = item.value.mark
+                    break
+                }
             }
         }
         return placeholder
