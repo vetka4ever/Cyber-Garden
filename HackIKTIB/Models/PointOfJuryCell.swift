@@ -58,7 +58,11 @@ class PointOfJuryCell: UITableViewCell, UITextFieldDelegate {
     func setPlaceHolder(point: Int)
     {
 //        self.placeholder = point
-        if point != -1
+        if point == -1
+        {
+            self.point.placeholder = ""
+        }
+        else
         {
         self.point.placeholder = String(point)
         }

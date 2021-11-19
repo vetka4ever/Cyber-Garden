@@ -78,7 +78,7 @@ class ProjectModel
         {
             if key != nameOfTeam
             {
-                keepingProj!.teams[nameOfTeam] = nil
+                keepingProj!.teams[key] = nil
             }
         }
         
@@ -86,6 +86,7 @@ class ProjectModel
         {
             let object = KeepingProjectRealm()
             object.data = keepingProj
+            print(keepingProj?.teams.keys)
             kurrentKeepingProject.count == 0 ? (self.realm.add(object)) : (kurrentKeepingProject[0].data = object.data)
             //            if kurrentKeepingProject.count == 0
             //            {

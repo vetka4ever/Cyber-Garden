@@ -47,6 +47,16 @@ class TeamPresenter
         return model.getTypeOfMarkWithId(id: id)
     }
     
+    func getAlertAboutSending(handlerForOkAction: @escaping ((UIAlertAction) -> Void)) -> UIAlertController
+    {
+        let alert = UIAlertController(title: nil, message: "Указаны верные оценки?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Да", style: .default, handler: handlerForOkAction)
+        let no = UIAlertAction(title: "Изменить", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(no)
+        return alert
+    }
+    
     func countOfTypeOfMarks() -> Int
     {
         return model.getCountOfTypeOfMarkWithId()

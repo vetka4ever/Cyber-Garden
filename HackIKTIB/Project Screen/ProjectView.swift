@@ -62,6 +62,7 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     {
         tableView.cellForRow(at: indexPath)?.isSelected = false
         let nameOfTeam = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        print(nameOfTeam)
         let view = presenter.updateTeamView(nameOfTeam: nameOfTeam!)
         
         navigationController?.pushViewController(view, animated: true)

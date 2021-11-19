@@ -63,7 +63,9 @@ class TeamModel
     
     func getNameOfTeam() -> String
     {
-        return project[0].data!.teams.keys.first!
+        let name = project[0].data!.teams.keys.first!
+        print (name)
+        return name
     }
     
     func getDataAboutTeam() -> String
