@@ -133,8 +133,8 @@ class MaindModel
                         newCase.teams[newTeam.name] = newTeam
 //                        print(newCase)
                     }
-                    print(newCase.name)
-                    print(newCase.teams.count)
+//                    print(newCase.name)
+//                    print(newCase.teams.count)
                     self.projects[newCase.name] = newCase
 //                    newCase = Project()
 //                    newTeam = Team()

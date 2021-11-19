@@ -58,15 +58,36 @@ class ProjectModel
         print(project[0].data)
         if project[0].data?.teams[nameOfTeam]?.marks.count != 0
         {
+            // 10 - 8
+            let marksOfTeam = project[0].data!.teams[nameOfTeam]!.marks
+            print(marksOfTeam)
+            //CASE IDENTYTY: 10
             description += "\n\nВаша оценка:\n"
-            let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
-            
-            for item in idOfMark
+            var reversedDictionaryOfMark = [Int:String]()
+            print(reversedDictionaryOfMark)
+            for item in typeOfMarks[0].data!.markType
             {
-                description += item + " - "
-                let markId = typeOfMarks[0].data!.markType[item]
-                description += "\(project[0].data!.teams[nameOfTeam]!.marks[markId!]!.mark)\n"
+                reversedDictionaryOfMark[item.value] = item.key
             }
+            
+            for item in marksOfTeam
+            {
+                if let safeMark = reversedDictionaryOfMark[item.key]
+                {
+                description += "\(safeMark) - \(item.value.mark)\n"
+                }
+            }
+            
+            
+            
+//            let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
+//
+//            for item in idOfMark
+//            {
+//                description += item + " - "
+//                let markId = typeOfMarks[0].data!.markType[item]
+//                description += "\(project[0].data!.teams[nameOfTeam]!.marks[markId!]!.mark)\n"
+//            }
         }
         return description
     }
