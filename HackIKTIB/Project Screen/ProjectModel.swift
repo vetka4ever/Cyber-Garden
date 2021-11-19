@@ -64,6 +64,7 @@ class ProjectModel
             //CASE IDENTYTY: 10
             description += "\n\nВаша оценка:\n"
             var reversedDictionaryOfMark = [Int:String]()
+            var descriptionDictionary = [String:Int]()
             print(reversedDictionaryOfMark)
             for item in typeOfMarks[0].data!.markType
             {
@@ -74,11 +75,17 @@ class ProjectModel
             {
                 if let safeMark = reversedDictionaryOfMark[item.key]
                 {
-                description += "\(safeMark) - \(item.value.mark)\n"
+                    descriptionDictionary[safeMark] = item.value.mark
                 }
             }
             
+            for item in descriptionDictionary.keys.sorted()
+            {
+                description += "\(item) - \(descriptionDictionary[item]!)\n"
+//                description += "\(item.key ) - \(item.value)\n"
+            }
             
+            //                description += "\(safeMark) - \(item.value.mark)\n"
             
 //            let idOfMark = typeOfMarks[0].data!.markType.keys.sorted()
 //

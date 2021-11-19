@@ -18,8 +18,8 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         super.viewDidLoad()
         view.backgroundColor = .systemGray5
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
-        self.view.addGestureRecognizer(swipe)
+//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
+//        self.view.addGestureRecognizer(swipe)
         setTableView()
         
     }
@@ -59,16 +59,18 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         self.navigationItem.title = presenter.getTitle()
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.leftBarButtonItem = presenter.getLeftBarButtonItem()
+//        self.navigationItem.leftBarButtonItem = presenter.getLeftBarButtonItem()
+        let leftBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "chevron.backward"), style: .done, target: self, action: #selector(alertExit(_:)))
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.titleView = presenter.getLabelOfNameOfUser()
         //        let image = UIImage.init(systemName: "power")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
         //        let item = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(alertExit(_:)))
         //        self.navigationItem.leftBarButtonItem = item
     }
     //MARK: OBJECTIVE-C FUNCS
-    @objc func alertExit(_ sender: UISwipeGestureRecognizer)
+    @objc func alertExit(_ sender: UIBarButtonItem)
     {
-        guard sender.direction == .right else {return}
+//        guard sender.direction == .right else {return}
         let alert = UIAlertController(title: "Внимание", message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "Да", style: .destructive)
         { (action) in
