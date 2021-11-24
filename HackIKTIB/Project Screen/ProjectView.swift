@@ -38,8 +38,12 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func setNavigationBar()
     {
-        viewWithNameOfTeam.text = presenter.nameOfProject()
-        self.navigationItem.titleView = viewWithNameOfTeam
+        
+//        viewWithNameOfTeam.text = presenter.nameOfProject()
+//        self.navigationItem.titleView = viewWithNameOfTeam
+//        self.title = "Команды"
+//        self.navigationItem.title = presenter.updateTitle()
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         let rightButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfoAboutProject))
 //
         self.navigationItem.rightBarButtonItem = rightButton
@@ -55,6 +59,8 @@ class ProjectView: UIViewController, UITableViewDelegate, UITableViewDataSource 
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell)!
         cell.textLabel?.text = presenter.nameOfTeam(id: indexPath.row)
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.numberOfLines = 0
         
         return cell
     }

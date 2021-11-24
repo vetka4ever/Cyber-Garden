@@ -18,8 +18,8 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         super.viewDidLoad()
         view.backgroundColor = .systemGray5
-//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
-//        self.view.addGestureRecognizer(swipe)
+        //        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(alertExit(_:)))
+        //        self.view.addGestureRecognizer(swipe)
         setTableView()
         
     }
@@ -35,7 +35,7 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.presenter.typeOfMarks { }
             }
         }
-       
+        
         setNavigationBar()
     }
     //MARK: SET OF VIEW
@@ -54,12 +54,12 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
     }
     
-     
+    
     func setNavigationBar()
     {
         self.navigationItem.title = presenter.getTitle()
         self.navigationController?.navigationBar.prefersLargeTitles = true
-//        self.navigationItem.leftBarButtonItem = presenter.getLeftBarButtonItem()
+        //        self.navigationItem.leftBarButtonItem = presenter.getLeftBarButtonItem()
         let leftBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "chevron.backward"), style: .done, target: self, action: #selector(alertExit(_:)))
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.titleView = presenter.getLabelOfNameOfUser()
@@ -70,7 +70,7 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: OBJECTIVE-C FUNCS
     @objc func alertExit(_ sender: UIBarButtonItem)
     {
-//        guard sender.direction == .right else {return}
+        //        guard sender.direction == .right else {return}
         let alert = UIAlertController(title: "Внимание", message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "Да", style: .destructive)
         { (action) in
@@ -110,6 +110,8 @@ class MainScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell)!
         cell.textLabel?.text = presenter.getNameOfProject(key: indexPath.row)
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
     

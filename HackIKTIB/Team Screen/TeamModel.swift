@@ -10,7 +10,7 @@ import SwiftyJSON
 import UIKit
 class TeamModel
 {
-    private var title = "Оценка команды"
+    private var title = "Оценивание"
     //    private var typeOfMarks = [String:Int]()
     private let typeOfMarks : Results<TypeOfMarkRealm> =
     {

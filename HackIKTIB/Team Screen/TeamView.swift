@@ -28,8 +28,9 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         
-        labelForNameOfTeam.text = presenter.nameOfTeam()
-        self.navigationItem.titleView = labelForNameOfTeam
+//        labelForNameOfTeam.text = presenter.nameOfTeam()
+//        self.navigationItem.titleView = labelForNameOfTeam
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         let sendButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"), style: .plain, target: self, action: #selector(alertUserAboutSending))
         let questionButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showInfo))
         self.navigationItem.rightBarButtonItems = [sendButton, questionButton]
@@ -47,6 +48,9 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func setTableView()
     {
+//        tableView.estimatedRowHeight = 600
+//        tableView.rowHeight = UITableView.automaticDimension
+        
         tableView = UITableView(frame: view.frame, style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
@@ -113,14 +117,26 @@ class TeamView: UIViewController, UITableViewDelegate, UITableViewDataSource
         return presenter.countOfTypeOfMarks()
     }
     
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        600
+//    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        UITableView.automaticDimension
+//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as! PointOfJuryCell
         cell.selectionStyle = .none
+        
         cell.setTitle(title: presenter.typeOfMarkWithId(id: indexPath.row))
         let point = presenter.placeholder(typeOfPoint: cell.getTitle())
-        //        print(point)
         cell.setPlaceHolder(point: point)
+    
+        
+        //        print(point)
+        
         //        cell.reloadInputViews()
         cell.backgroundColor = .white
         return cell

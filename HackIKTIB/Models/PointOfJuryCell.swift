@@ -15,9 +15,11 @@ class PointOfJuryCell: UITableViewCell, UITextFieldDelegate {
     
     override func layoutSubviews() {
         title.frame = CGRect(x: 5, y: 0, width: self.frame.width / 2, height: self.frame.height)
+        
         title.numberOfLines = 0
         title.textAlignment = .center
         title.textColor = .black
+        
         
         let insetForCell = self.frame.height * 0.1
         let newHeight = self.frame.height - insetForCell * 2
@@ -77,9 +79,9 @@ class PointOfJuryCell: UITableViewCell, UITextFieldDelegate {
         guard let point = Decimal(string: textField.text!) else {return}
 //        print(point)
         
-        if point > 10
+        if point > 5
         {
-            textField.text = "10"
+            textField.text = "5"
         }
         else if point < 0
         {
